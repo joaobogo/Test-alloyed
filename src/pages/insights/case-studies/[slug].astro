@@ -1,0 +1,62 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CTA from '../../../components/CTA.astro';
+import CaseCard from '../../../components/CaseCard.astro';
+import { caseStudies, site } from '../../../data/site';
+
+export function getStaticPaths() {
+  return caseStudies.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
+}
+const { cs } = Astro.props;
+const related = caseStudies.filter((c) => c.slug !== cs.slug && c.industry === cs.industry).slice(0, 3);
+const title = cs.title.length > 58 ? `${cs.title.slice(0, 55).trim()}… | Alloyed` : `${cs.title} | Alloyed`;
+const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: cs.title, description: cs.summary, author: { '@id': `${site.url}/#organization` }, publisher: { '@id': `${site.url}/#organization` }, mainEntityOfPage: `${site.url}/insights/case-studies/${cs.slug}/`, about: cs.industry }];
+---
+
+<Base title={title} description={cs.summary.slice(0, 158)} ogType="article" schema={schema} breadcrumbs={[{ name: 'Case Studies', href: '/insights/case-studies/' }, { name: cs.title, href: `/insights/case-studies/${cs.slug}/` }]}>
+  <article>
+    <header class="bg-ink-900 py-20 text-white">
+      <div class="container-x">
+        <nav aria-label="Breadcrumb" class="text-[13px] text-white/50"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/insights/case-studies/" class="hover:text-white">Case Studies</a></nav>
+        <p class="eyebrow-light mt-6">Case study · {cs.industry}</p>
+        <h1 class="h-display mt-3 max-w-[24ch] text-[36px] text-white sm:text-[50px]">{cs.title}</h1>
+        <p class="mt-5 max-w-[64ch] text-[17px] leading-relaxed text-white/75">{cs.summary}</p>
+        <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-[14px]">
+          <div><dt class="text-white/45">Client</dt><dd class="font-medium text-white">{cs.client}</dd></div>
+          <div><dt class="text-white/45">Services</dt><dd class="font-medium text-white">{cs.services.join(' · ')}</dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="bg-ink-50 py-12">
+      <div class="container-x">
+        <dl class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 sm:grid-cols-3">
+          {cs.metrics.map((m) => <div class="bg-white p-7"><dd class="h-display text-[44px] text-brand-600">{m.value}</dd><dt class="mt-1 text-[14.5px] font-medium text-ink-700">{m.label}</dt></div>)}
+        </dl>
+      </div>
+    </section>
+
+    <section class="py-16">
+      <div class="container-x grid gap-12 lg:grid-cols-12">
+        <div class="prose-alloyed lg:col-span-8 space-y-12">
+          {cs.challenge && <div><p class="eyebrow">Challenge</p><h2 class="h-display mt-2 text-[30px]">What the client was up against</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.challenge.map((c) => <li class="flex gap-3"><span class="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-ember-500"></span>{c}</li>)}</ul></div>}
+          {cs.solution && <div><p class="eyebrow">Solution</p><h2 class="h-display mt-2 text-[30px]">What Alloyed did</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.solution.map((c) => <li class="flex gap-3"><span class="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"></span>{c}</li>)}</ul></div>}
+          {cs.results && <div><p class="eyebrow">Results</p><h2 class="h-display mt-2 text-[30px]">Measurable outcomes</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.results.map((c) => <li class="flex gap-3"><svg class="mt-1.5 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{c}</li>)}</ul></div>}
+          {!cs.challenge && <div><p class="eyebrow">Summary</p><h2 class="h-display mt-2 text-[30px]">The engagement</h2><p class="mt-4 text-[16.5px] leading-relaxed text-ink-800">{cs.summary}</p><p class="mt-4 text-[15px] text-ink-600">Want the full write-up with team structure, timeline and QA framework? Request it below and an operations expert will send it along with a first read on your own workflow.</p></div>}
+        </div>
+        <aside class="lg:col-span-4">
+          <div class="card sticky top-24 p-6">
+            <p class="eyebrow">Similar challenge?</p>
+            <h3 class="mt-2 text-[22px] font-bold">Let’s map your workflow.</h3>
+            <p class="mt-2 text-[14px] text-ink-600">A 30-minute working session with an operations expert. We size the opportunity and tell you whether Alloyed is the right fit.</p>
+            <a href="#contact" class="btn-ember mt-5 w-full">Talk to an operations expert</a>
+            <a href="/insights/case-studies/" class="btn-ghost mt-2 w-full">More case studies</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    {related.length > 0 && <section class="bg-ink-50 py-16"><div class="container-x"><p class="eyebrow">Related</p><h2 class="h-display mt-2 text-[30px]">More in {cs.industry}</h2><div class="mt-8 grid gap-5 md:grid-cols-3">{related.map((c) => <CaseCard cs={c} compact />)}</div></div></section>}
+  </article>
+  <CTA interest={`Case study: ${cs.title}`} />
+</Base>

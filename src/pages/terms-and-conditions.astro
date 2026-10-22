@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Terms and Conditions | Alloyed" description="Terms governing use of alloyed.io, operated by Alloyed Solutions Inc." dark={false} breadcrumbs={[{ name: 'Terms', href: '/terms-and-conditions/' }]}>
+  <section class="py-16">
+    <div class="container-x max-w-3xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="h-display mt-2 text-[40px]">Terms and Conditions</h1>
+      <p class="mt-2 text-[14px] text-ink-500">Last updated: October 2026. Replace this placeholder with the approved terms from the existing site before launch.</p>
+      <div class="mt-8 space-y-6 text-[15.5px] leading-relaxed text-ink-700">
+        <p>By using alloyed.io you agree to these terms. The site and its content are provided by {site.legalName} for general information about our services and do not constitute an offer or professional advice.</p>
+        <p>All content, trademarks and logos are the property of {site.legalName} or their respective owners and may not be reproduced without permission.</p>
+      </div>
+    </div>
+  </section>
+</Base>

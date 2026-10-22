@@ -1,0 +1,21 @@
+---
+import type { CaseStudy } from '../data/site';
+interface Props { cs: CaseStudy; compact?: boolean }
+const { cs, compact = false } = Astro.props;
+const lead = cs.metrics[0];
+---
+
+<a href={`/insights/case-studies/${cs.slug}/`} class="card group flex flex-col p-6 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-[0_24px_48px_-24px_rgba(51,44,242,.35)]">
+  <div class="flex items-center justify-between gap-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-400">
+    <span>{cs.industry}</span>
+    <span class="rounded-full bg-brand-50 px-2.5 py-1 text-brand-700 normal-case tracking-normal">Case study</span>
+  </div>
+  <p class="h-display mt-4 text-[36px] text-brand-600">{lead.value}</p>
+  <p class="text-[13.5px] font-medium text-ink-600">{lead.label}</p>
+  <h3 class="mt-4 font-sans text-[16.5px] font-semibold leading-snug text-ink-900 group-hover:text-brand-700">{cs.title}</h3>
+  {!compact && <p class="mt-2 line-clamp-3 text-[14px] leading-relaxed text-ink-600">{cs.summary}</p>}
+  <span class="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-semibold text-brand-600">
+    Read the case study
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="transition group-hover:translate-x-0.5"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </span>
+</a>

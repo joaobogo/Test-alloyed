@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 500 800;
+  font-stretch: 100% 125%;
+  font-display: swap;
+  src: url("/fonts/archivo-latin.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand */
+  --color-brand-50: #eef0ff;
+  --color-brand-100: #dde0ff;
+  --color-brand-200: #c0c5ff;
+  --color-brand-300: #9aa0ff;
+  --color-brand-400: #6f6ffb;
+  --color-brand-500: #4a43f5;
+  --color-brand-600: #332cf2;
+  --color-brand-700: #2a22cc;
+  --color-brand-800: #231ea3;
+  --color-brand-900: #1d1b7d;
+
+  --color-ember-400: #ff8a33;
+  --color-ember-500: #ff6b00;
+  --color-ember-600: #e05d00;
+
+  /* Neutrals: cool, deep ink for a serious enterprise feel */
+  --color-ink-950: #070a16;
+  --color-ink-900: #0b1020;
+  --color-ink-800: #141a30;
+  --color-ink-700: #27304d;
+  --color-ink-600: #3d476a;
+  --color-ink-500: #5a6487;
+  --color-ink-400: #7f88a8;
+  --color-ink-300: #aab1c9;
+  --color-ink-200: #d3d8e6;
+  --color-ink-100: #e9ecf4;
+  --color-ink-50: #f5f6fa;
+
+  --color-mint-500: #16a36b;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { @apply bg-white text-ink-800 font-sans antialiased; }
+  ::selection { background: #332cf2; color: #fff; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-ink-900; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :focus-visible { outline: 2px solid #332cf2; outline-offset: 3px; border-radius: 4px; }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-600;
+}
+@utility eyebrow-light {
+  @apply inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-300;
+}
+@utility h-display {
+  font-family: var(--font-display);
+  font-stretch: 100%;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-weight: 700;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-[15px] font-semibold transition-all duration-200 whitespace-nowrap;
+}
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white shadow-[0_1px_0_rgba(255,255,255,.2)_inset,0_8px_24px_-8px_rgba(51,44,242,.6)] hover:bg-brand-700 hover:-translate-y-px;
+}
+@utility btn-ember {
+  @apply btn bg-ember-500 text-white hover:bg-ember-600 hover:-translate-y-px shadow-[0_8px_24px_-8px_rgba(255,107,0,.6)];
+}
+@utility btn-ghost {
+  @apply btn border border-ink-200 bg-white text-ink-900 hover:border-ink-900;
+}
+@utility btn-ghost-light {
+  @apply btn border border-white/25 bg-white/5 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur;
+}
+@utility card {
+  @apply rounded-2xl border border-ink-100 bg-white shadow-[0_1px_2px_rgba(11,16,32,.04),0_12px_32px_-16px_rgba(11,16,32,.12)];
+}
+@utility grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+@utility grid-bg-light {
+  background-image:
+    linear-gradient(to right, rgba(11,16,32,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11,16,32,.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Reveal-on-scroll: content is fully present in HTML; only opacity/transform animate. */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+.no-js .reveal { opacity: 1; transform: none; }
+
+/* Stat counters render their final value; the count-up is decoration only. */
+[data-count] { font-variant-numeric: tabular-nums; }
+
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }

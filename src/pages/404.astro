@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { services } from '../data/site';
+---
+
+<Base title="Page not found | Alloyed" description="The page you’re looking for doesn’t exist or has moved." noindex>
+  <section class="bg-ink-900 py-24 text-white">
+    <div class="container-x">
+      <p class="eyebrow-light">404</p>
+      <h1 class="h-display mt-3 text-[42px] text-white sm:text-[56px]">That page has moved or never existed.</h1>
+      <p class="mt-5 max-w-lg text-[16.5px] text-white/75">If you followed a link from sebpo.com, the content now lives on alloyed.io. Try one of these:</p>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{services.map((s) => <li><a href={`/services/${s.slug}/`} class="block rounded-xl border border-white/15 px-4 py-3 text-[15px] font-medium hover:bg-white/5">{s.name}</a></li>)}</ul>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="/" class="btn-ember">Back to home</a><a href="/insights/case-studies/" class="btn-ghost-light">Case studies</a><a href="/contact/" class="btn-ghost-light">Contact</a></div>
+    </div>
+  </section>
+</Base>

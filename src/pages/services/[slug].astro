@@ -1,0 +1,148 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { services, caseBySlug, teamModel, process, site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const cs = caseBySlug(s.caseStudy)!;
+const related = services.filter((x) => x.slug !== s.slug).slice(0, 3);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: s.title,
+    serviceType: s.name,
+    description: s.metaDescription,
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: ['US', 'CA', 'GB', 'EU'],
+    url: `${site.url}/services/${s.slug}/`,
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: `${s.name} capabilities`, itemListElement: s.capabilities.map((c) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: c.title } })) },
+  },
+];
+---
+
+<Base title={s.metaTitle} description={s.metaDescription} schema={schema} breadcrumbs={[{ name: 'Services', href: '/services/' }, { name: s.name, href: `/services/${s.slug}/` }]}>
+  <section class="relative overflow-hidden bg-ink-900 text-white">
+    <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
+    <div class="absolute -right-32 top-0 h-[480px] w-[480px] rounded-full bg-brand-600/30 blur-[120px]" aria-hidden="true"></div>
+    <div class="container-x relative py-20 sm:py-24">
+      <nav aria-label="Breadcrumb" class="text-[13px] text-white/50"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/services/" class="hover:text-white">Services</a> <span class="mx-1.5">/</span> <span class="text-white/80">{s.name}</span></nav>
+      <p class="eyebrow-light mt-6">{s.name}</p>
+      <h1 class="h-display mt-3 max-w-[18ch] text-[40px] text-white sm:text-[56px]">{s.headline}</h1>
+      <p class="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-white/75">{s.intro}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#contact" class="btn-ember !px-6">{s.cta}</a>
+        <a href={`/insights/case-studies/${cs.slug}/`} class="btn-ghost-light !px-6">Read the featured case study</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-50 py-14">
+    <div class="container-x">
+      <p class="eyebrow">Measurable outcomes</p>
+      <dl class="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 lg:grid-cols-4">
+        {s.outcomes.map((o) => (
+          <div class="bg-white p-6">
+            <dd class="h-display text-[36px] text-brand-600 sm:text-[44px]">{o.value}</dd>
+            <dt class="mt-1 text-[14px] font-semibold text-ink-800">{o.label}</dt>
+            <p class="mt-1 text-[12.5px] text-ink-500">{o.client}</p>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-x">
+      <div class="max-w-2xl"><p class="eyebrow">Who we serve</p><h2 class="h-display mt-2 text-[32px] sm:text-[40px]">Built for teams where precision at volume is the job.</h2></div>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {s.serves.map((w) => (
+          <li class="reveal rounded-2xl border border-ink-100 p-6"><h3 class="text-[19px] font-bold">{w.title}</h3><p class="mt-2 text-[14.5px] leading-relaxed text-ink-600">{w.text}</p></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-ink-900 py-20 text-white">
+    <div class="container-x grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="eyebrow-light">Capabilities</p>
+        <h2 class="h-display mt-2 text-[32px] text-white sm:text-[40px]">How we help</h2>
+        <p class="mt-4 text-[15px] leading-relaxed text-white/65">Each capability is delivered by a dedicated team with documented SOPs, QA checkpoints and KPI reporting.</p>
+        <div class="mt-8">
+          <p class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">Coverage</p>
+          <ul class="mt-3 flex flex-wrap gap-2">{s.coverage.map((c) => <li class="rounded-full border border-white/15 px-3 py-1 text-[13px] text-white/80">{c}</li>)}</ul>
+        </div>
+      </div>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+        {s.capabilities.map((c) => (
+          <li class="reveal rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+            <h3 class="font-sans text-[17px] font-semibold text-white">{c.title}</h3>
+            <ul class="mt-3 space-y-1.5 text-[14px] text-white/70">{c.bullets.map((b) => <li class="flex gap-2"><span class="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-ember-500"></span>{b}</li>)}</ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container-x grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow">How delivery works</p>
+        <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">Three steps from intake to improvement.</h2>
+        <ol class="mt-8 space-y-6">
+          {process.map((p) => (
+            <li class="flex gap-4"><span class="font-display text-[13px] font-bold tracking-widest text-ember-500 pt-1">{p.n}</span><div><h3 class="text-[19px] font-bold">{p.title}</h3><p class="mt-1 text-[14.5px] leading-relaxed text-ink-600">{p.text}</p></div></li>
+          ))}
+        </ol>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="card p-7">
+          <p class="eyebrow">Team model</p>
+          <h3 class="mt-2 text-[24px] font-bold">A team built around your operation.</h3>
+          <ul class="mt-6 grid gap-5 sm:grid-cols-2">
+            {teamModel.map((t) => <li><h4 class="font-sans text-[15px] font-semibold text-ink-900">{t.role}</h4><p class="mt-1 text-[13.5px] leading-relaxed text-ink-600">{t.text}</p></li>)}
+          </ul>
+          <div class="mt-7 border-t border-ink-100 pt-5">
+            <p class="text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-400">We work inside your stack</p>
+            <ul class="mt-3 flex flex-wrap gap-2">{s.tools.map((t) => <li class="rounded-full bg-ink-50 px-3 py-1 text-[13px] text-ink-700">{t}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ink-50 py-20">
+    <div class="container-x">
+      <p class="eyebrow">Featured case study</p>
+      <div class="mt-5 grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <h2 class="h-display text-[30px] sm:text-[38px]"><a href={`/insights/case-studies/${cs.slug}/`} class="hover:text-brand-700">{cs.title}</a></h2>
+          <p class="mt-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink-400">{cs.client} · {cs.industry}</p>
+          <p class="mt-4 text-[15.5px] leading-relaxed text-ink-600">{cs.summary}</p>
+          {cs.results && <ul class="mt-5 space-y-2 text-[15px] text-ink-800">{cs.results.slice(0, 3).map((r) => <li class="flex gap-3"><svg class="mt-1 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{r}</li>)}</ul>}
+          <a href={`/insights/case-studies/${cs.slug}/`} class="btn-primary mt-7">Read the full case study</a>
+        </div>
+        <dl class="grid gap-3 lg:col-span-5">
+          {cs.metrics.map((m) => <div class="card p-5"><dd class="h-display text-[36px] text-brand-600">{m.value}</dd><dt class="text-[14px] text-ink-600">{m.label}</dt></div>)}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container-x">
+      <p class="eyebrow">Related services</p>
+      <ul class="mt-5 grid gap-4 sm:grid-cols-3">
+        {related.map((r) => <li><a href={`/services/${r.slug}/`} class="card block p-6 hover:border-brand-200"><h3 class="text-[19px] font-bold">{r.name}</h3><p class="mt-2 text-[14px] text-ink-600">{r.short}</p></a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CTA cta={s.cta} interest={s.name} />
+</Base>

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { site, proof } from '../data/site';
+const schema = [{ '@context': 'https://schema.org', '@type': 'ContactPage', url: `${site.url}/contact/`, mainEntity: { '@id': `${site.url}/#organization` } }];
+---
+
+<Base title="Contact Alloyed: Talk to an Operations Expert" description="Reach Alloyed Monday to Friday, 8:30 AM to 5:30 PM ET. Tell us about your workflow and an operations expert replies within one business day." schema={schema} breadcrumbs={[{ name: 'Contact', href: '/contact/' }]}>
+  <section class="relative overflow-hidden bg-ink-900 text-white">
+    <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
+    <div class="container-x relative grid gap-12 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow-light">Contact</p>
+        <h1 class="h-display mt-3 text-[42px] text-white sm:text-[56px]">Let’s talk. We’re ready.</h1>
+        <p class="mt-5 max-w-md text-[16.5px] leading-relaxed text-white/75">Questions about a service, a quote for a dedicated team, or a second opinion on an automation plan. An operations expert replies within one business day.</p>
+        <dl class="mt-8 space-y-4 text-[15px]">
+          <div><dt class="text-white/45">Phone</dt><dd><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="font-medium text-white hover:underline">{site.phone}</a></dd></div>
+          <div><dt class="text-white/45">Email</dt><dd><a href={`mailto:${site.email}`} class="font-medium text-white hover:underline">{site.email}</a></dd></div>
+          <div><dt class="text-white/45">Hours</dt><dd class="text-white/85">{site.hours}</dd></div>
+          <div><dt class="text-white/45">Headquarters</dt><dd class="text-white/85">{site.hq.label}</dd></div>
+        </dl>
+        <ul class="mt-10 space-y-2 text-[13px] text-white/55">{proof.map((p) => <li>· {p.label}</li>)}</ul>
+        <p class="mt-8 text-[14px] text-white/55">Looking for a job? <a href="/about-us/careers/" class="text-white underline underline-offset-2">See open roles</a>.</p>
+      </div>
+      <div class="lg:col-span-7"><LeadForm /></div>
+    </div>
+  </section>
+</Base>

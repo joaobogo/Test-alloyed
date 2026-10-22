@@ -1,0 +1,27 @@
+# --- Canonical host and trailing slash -------------------------------------
+https://www.alloyed.io/*  https://alloyed.io/:splat  301!
+
+# --- Legacy alloyed.io paths (old SPA routes without trailing slash are
+#     handled by Netlify's pretty-URL normalization; these are renamed pages)
+/about-us/who-we-are/   /about-us/   301
+/about-us/who-we-are    /about-us/   301
+/service/*              /services/:splat  301
+/case-study/*           /insights/case-studies/:splat  301
+/insights/case-studies/how-sebpo-scaled-media-organizations-advertising-operations-while-cutting-hiring-costs-by-70/  /insights/case-studies/how-alloyed-cut-media-ad-ops-hiring-costs-by-70/  301
+/campaigns/client-success/  /insights/case-studies/  301
+
+# --- sebpo.com -> alloyed.io map. Deploy this same file on the sebpo.com
+#     host so every legacy URL lands on its closest page with a permanent 301.
+/services/ad-operations/            /services/marketing-services/      301
+/quality-assurance/                 /services/operational-excellence/  301
+/media-planning/                    /services/marketing-services/      301
+/creative-and-technical-services/   /services/marketing-services/      301
+/digital-media-and-advertising/     /industries/advertising-adtech/    301
+/about/j-c-groon/                   /about-us/                         301
+/iab-alm-24/                        /insights/case-studies/            301
+/case-studies/                      /insights/case-studies/            301
+/case-studies/*                     /insights/case-studies/:splat      301
+/blog/*                             /insights/perspectives/            301
+
+# --- Real 404s for everything else (Netlify serves 404.html with a 404 status)
+/*  /404/index.html  404
