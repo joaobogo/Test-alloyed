@@ -60,8 +60,8 @@ const normalizeHeadings = (md: string) => {
   const levels = [...md.matchAll(/^(#{1,6})\s/gm)].map((m) => m[1].length);
   if (!levels.length) return md;
   const shift = 2 - Math.min(...levels);
-  if (shift <= 0) return md;
-  return md.replace(/^(#{1,6})(\s)/gm, (_m, h, sp) => '#'.repeat(Math.min(6, h.length + shift)) + sp);
+  if (shift === 0) return md;
+  return md.replace(/^(#{1,6})(\s)/gm, (_m, h, sp) => '#'.repeat(Math.min(6, Math.max(2, h.length + shift))) + sp);
 };
 
 export const renderMarkdown = (md: string) => marked.parse(normalizeHeadings(normalizeLinks(md))) as string;
