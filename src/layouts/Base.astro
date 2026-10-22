@@ -163,6 +163,19 @@ const website = {
         document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => cio.observe(el));
       }
 
+      // Pointer tilt for .tilt elements (desktop only).
+      if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
+        document.querySelectorAll<HTMLElement>('.tilt').forEach((el) => {
+          const parent = el.parentElement!;
+          parent.addEventListener('pointermove', (e) => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+            el.style.setProperty('--ry', `${x * 10}deg`); el.style.setProperty('--rx', `${-y * 8}deg`);
+          });
+          parent.addEventListener('pointerleave', () => { el.style.setProperty('--ry', '0deg'); el.style.setProperty('--rx', '0deg'); });
+        });
+      }
+
       // Capture lead source once per session for the contact form hidden fields.
       try {
         const p = new URLSearchParams(location.search);

@@ -1,0 +1,56 @@
+---
+// A static "operations control center" card for the hero. Pure HTML/CSS, no
+// data fetching; the numbers are published client outcomes.
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+const rows = [
+  { name: 'Campaign trafficking', client: 'Global sports brand', sla: '99.99%', state: 'On track' },
+  { name: 'Month-end billing', client: 'Travel brand', sla: '100%', state: 'Closed · day 5' },
+  { name: 'AML screening queue', client: 'Financial services', sla: '99.27%', state: 'Within SLA' },
+  { name: 'Creative resizes', client: 'Ad tech leader', sla: '2x output', state: 'Peak mode' },
+];
+---
+
+<div class={`relative ${cls}`} aria-hidden="true">
+  <div class="rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">
+        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-500 opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-mint-500"></span></span>
+        Operations control center
+      </div>
+      <span class="rounded-full bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/60">This week</span>
+    </div>
+
+    <div class="mt-5 grid grid-cols-4 gap-2.5">
+      {[['99.99%', 'QA accuracy'], ['98%', 'Retention'], ['92', 'NPS'], ['24/7', 'Coverage']].map(([v, l]) => (
+        <div class="rounded-xl border border-white/10 bg-ink-900/60 p-3">
+          <p class="h-display text-[22px] text-white">{v}</p>
+          <p class="text-[11.5px] text-white/60">{l}</p>
+        </div>
+      ))}
+    </div>
+
+    <ul class="mt-4 divide-y divide-white/10 rounded-xl border border-white/10 bg-ink-900/60">
+      {rows.map((r) => (
+        <li class="flex items-center justify-between gap-3 px-4 py-3">
+          <div class="min-w-0">
+            <p class="truncate text-[13.5px] font-medium text-white">{r.name}</p>
+            <p class="truncate text-[11.5px] text-white/60">{r.client}</p>
+          </div>
+          <div class="flex shrink-0 items-center gap-3">
+            <span class="font-display text-[15px] font-bold text-ember-400">{r.sla}</span>
+            <span class="rounded-full border border-mint-500/40 bg-mint-500/10 px-2 py-0.5 text-[11px] font-medium text-mint-300">{r.state}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-4 rounded-xl border border-white/10 bg-ink-900/60 p-4">
+      <div class="flex items-center justify-between text-[11.5px] text-white/60"><span>Cost vs in-house, 9-person ad ops team</span><span class="font-semibold text-white">~70% lower</span></div>
+      <div class="mt-2.5 space-y-1.5">
+        <div class="flex items-center gap-2 text-[11px] text-white/60"><span class="w-16 shrink-0">In-house</span><span class="h-2 flex-1 rounded-full bg-white/10"><span class="block h-2 w-full rounded-full bg-white/30"></span></span><span class="w-14 text-right">$850K+</span></div>
+        <div class="flex items-center gap-2 text-[11px] text-white/60"><span class="w-16 shrink-0">Alloyed</span><span class="h-2 flex-1 rounded-full bg-white/10"><span class="block h-2 w-[29%] rounded-full bg-gradient-to-r from-ember-500 to-ember-400"></span></span><span class="w-14 text-right text-white">$250K</span></div>
+      </div>
+    </div>
+  </div>
+</div>
