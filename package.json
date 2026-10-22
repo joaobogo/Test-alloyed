@@ -17,6 +17,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "lighthouse": "^12.8.2",
-    "playwright": "^1.49.1"
+    "playwright": "^1.49.1",
+    "tsx": "^4.19.2"
   }
 }

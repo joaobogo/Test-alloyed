@@ -13,7 +13,7 @@ const cases = ind.caseStudies.map(caseBySlug).filter(Boolean);
 const schema = [{ '@context': 'https://schema.org', '@type': 'Service', name: `Operations outsourcing for ${ind.name}`, description: ind.metaDescription, provider: { '@id': `${site.url}/#organization` }, audience: { '@type': 'BusinessAudience', name: ind.name }, url: `${site.url}/industries/${ind.slug}/` }];
 ---
 
-<Base title={ind.metaTitle} description={ind.metaDescription} schema={schema} breadcrumbs={[{ name: 'Industries', href: '/industries/' }, { name: ind.name, href: `/industries/${ind.slug}/` }]}>
+<Base title={ind.metaTitle} description={ind.metaDescription} ogImage={`/og/industries-${ind.slug}.png`} schema={schema} breadcrumbs={[{ name: 'Industries', href: '/industries/' }, { name: ind.name, href: `/industries/${ind.slug}/` }]}>
   <section class="relative overflow-hidden bg-ink-900 text-white">
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
     <div class="container-x relative py-20 sm:py-24">

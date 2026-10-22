@@ -13,11 +13,12 @@ interface Props {
   schema?: Record<string, unknown>[];
   breadcrumbs?: { name: string; href: string }[];
   dark?: boolean;
+  ogImage?: string;
 }
 
-const { title, description, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true } = Astro.props;
+const { title, description, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true, ogImage: og = '/og-default.png' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/og-default.png', Astro.site).href;
+const ogImage = new URL(og, Astro.site).href;
 
 const org = {
   '@context': 'https://schema.org',

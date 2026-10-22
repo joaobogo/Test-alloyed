@@ -26,7 +26,7 @@ const schema = [
 ];
 ---
 
-<Base title={s.metaTitle} description={s.metaDescription} schema={schema} breadcrumbs={[{ name: 'Services', href: '/services/' }, { name: s.name, href: `/services/${s.slug}/` }]}>
+<Base title={s.metaTitle} description={s.metaDescription} ogImage={`/og/services-${s.slug}.png`} schema={schema} breadcrumbs={[{ name: 'Services', href: '/services/' }, { name: s.name, href: `/services/${s.slug}/` }]}>
   <section class="relative overflow-hidden bg-ink-900 text-white">
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
     <div class="absolute -right-32 top-0 h-[480px] w-[480px] rounded-full bg-brand-600/30 blur-[120px]" aria-hidden="true"></div>
