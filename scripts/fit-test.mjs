@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = []; p.on('pageerror', (e) => errors.push(e.message));
+await p.goto('http://127.0.0.1:4321/services/', { waitUntil: 'networkidle' });
+await p.evaluate(() => localStorage.setItem('alloyed-consent', '{"analytics":false}')); await p.reload({ waitUntil: 'networkidle' });
+await p.click('label:has(input[name="q2"][value="compliance-risk"])'); await p.click('label:has(input[name="q3"][value="handoff"])'); await p.waitForTimeout(200);
+console.log('visible result:', await p.evaluate(() => [...document.querySelectorAll('[data-fit]')].find((e) => !e.hidden)?.getAttribute('data-fit')), '| model:', await p.evaluate(() => [...document.querySelectorAll('[data-fit]')].find((e) => !e.hidden)?.querySelector('[data-model]')?.textContent));
+console.log('errors:', errors.length ? errors : 'none');
+await b.close();
