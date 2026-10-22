@@ -1,0 +1,31 @@
+---
+// Slim bottom bar on phones only. Appears after the first screen, hides when a
+// form is in view or the menu is open, respects the home-indicator safe area.
+---
+
+<div id="mobile-cta" class="mobile-cta fixed inset-x-3 bottom-3 z-40 sm:hidden" hidden>
+  <a href="/contact/" class="btn-ember w-full !py-3.5 shadow-[0_16px_40px_-12px_rgba(255,107,0,.7)]">Talk to an operations expert
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<style>
+  .mobile-cta { padding-bottom: env(safe-area-inset-bottom, 0px); transition: transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s; }
+  .mobile-cta[data-off] { transform: translateY(120%); opacity: 0; pointer-events: none; }
+  :root.menu-open .mobile-cta { transform: translateY(120%); opacity: 0; }
+</style>
+
+<script>
+  const init = () => {
+    const bar = document.getElementById('mobile-cta');
+    if (!bar) return;
+    bar.hidden = false; bar.setAttribute('data-off', '');
+    let formVisible = false;
+    const forms = document.querySelectorAll('form, #contact, footer');
+    const io = new IntersectionObserver((es) => { formVisible = es.some((e) => e.isIntersecting) || [...forms].some((f) => { const r = f.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }); apply(); }, { threshold: 0 });
+    forms.forEach((f) => io.observe(f));
+    const apply = () => { const past = scrollY > innerHeight * 0.8; if (past && !formVisible) bar.removeAttribute('data-off'); else bar.setAttribute('data-off', ''); };
+    addEventListener('scroll', apply, { passive: true }); apply();
+  };
+  document.addEventListener('astro:page-load', init);
+</script>

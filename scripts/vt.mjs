@@ -1,0 +1,21 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const c = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await c.newPage();
+const errors = []; p.on('pageerror', (e) => errors.push(e.message)); p.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+await p.goto('http://127.0.0.1:4321/', { waitUntil: 'networkidle' });
+await p.evaluate(() => localStorage.setItem('alloyed-consent', '{"analytics":false}'));
+await p.hover('nav a[href="/services/"]'); await p.waitForTimeout(300); await p.click('nav a[href="/services/marketing-services/"]'); await p.waitForURL('**/services/marketing-services/'); await p.waitForTimeout(600);
+console.log('after client nav, h1:', (await p.textContent('h1')).trim().slice(0, 40), '| faq details:', await p.locator('details').count());
+await p.click('header a[aria-label="Alloyed home"]'); await p.waitForURL('http://127.0.0.1:4321/'); await p.waitForTimeout(1500);
+console.log('canvas visible:', await p.evaluate(() => getComputedStyle(document.querySelector('.hero-gl-canvas')).opacity));
+await p.locator('#c-size').fill('20'); await p.waitForTimeout(100);
+console.log('calc updates:', await p.textContent('#c-inhouse'));
+console.log('errors:', errors.length ? errors : 'none');
+// mobile CTA bar
+const m = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, deviceScaleFactor: 2 }); const mp = await m.newPage();
+await mp.goto('http://127.0.0.1:4321/services/finance-accounting/', { waitUntil: 'networkidle' }); await mp.evaluate(() => localStorage.setItem('alloyed-consent', '{"analytics":false}')); await mp.reload({ waitUntil: 'networkidle' });
+await mp.evaluate(() => scrollTo(0, 1800)); await mp.waitForTimeout(600); await mp.screenshot({ path: '/tmp/shots/cta-m.png' });
+console.log('cta shown:', await mp.evaluate(() => !document.getElementById('mobile-cta').hasAttribute('data-off')));
+await mp.evaluate(() => document.querySelector('#contact').scrollIntoView()); await mp.waitForTimeout(600);
+console.log('cta hidden near form:', await mp.evaluate(() => document.getElementById('mobile-cta').hasAttribute('data-off')));
+await b.close();

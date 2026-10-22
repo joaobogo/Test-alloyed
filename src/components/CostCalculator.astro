@@ -66,7 +66,9 @@
 </div>
 
 <script>
+  const init = () => {
   const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+  if (!$('c-size')) return;
   const fmt = (n: number) => '$' + Math.round(n / 1000) * 1000 .toLocaleString('en-US');
   const money = (n: number) => '$' + (Math.round(n / 1000) * 1000).toLocaleString('en-US');
   const update = () => {
@@ -84,4 +86,6 @@
   ['c-size', 'c-cost'].forEach((id) => $(id).addEventListener('input', update));
   document.querySelectorAll('input[name="c-fn"]').forEach((r) => r.addEventListener('change', update));
   update();
+  };
+  document.addEventListener('astro:page-load', init);
 </script>

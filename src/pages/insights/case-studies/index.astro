@@ -27,6 +27,7 @@ const industries = [...new Set(caseStudies.map((c) => c.industry))];
   </section>
   <CTA />
   <script>
+  const init = () => {
     const btns = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
     const items = document.querySelectorAll<HTMLElement>('#case-grid > [data-industry]');
     btns.forEach((b) => b.addEventListener('click', () => {
@@ -34,5 +35,7 @@ const industries = [...new Set(caseStudies.map((c) => c.industry))];
       b.className = 'rounded-full border border-ink-900 bg-ink-900 px-4 py-1.5 text-[13px] font-semibold text-white';
       items.forEach((it) => { it.hidden = b.dataset.filter !== 'all' && it.dataset.industry !== b.dataset.filter; });
     }));
-  </script>
+    };
+  document.addEventListener('astro:page-load', init);
+</script>
 </Base>

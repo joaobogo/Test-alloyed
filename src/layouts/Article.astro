@@ -82,6 +82,9 @@ const crumbs = [{ name: 'Insights', href: '/insights/' }, { name: kind === 'News
   </article>
   <CTA interest={`${kind}: ${a.title}`} />
   <script>
+  const init = () => {
     document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => b.addEventListener('click', async () => { try { await navigator.clipboard.writeText(b.dataset.copy!); b.textContent = 'Copied'; setTimeout(() => (b.textContent = 'Copy link'), 1500); } catch {} }));
-  </script>
+    };
+  document.addEventListener('astro:page-load', init);
+</script>
 </Base>

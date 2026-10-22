@@ -22,6 +22,7 @@ const GTM_ID = 'GTM-W3D6T5PL';
 </div>
 
 <script define:vars={{ GTM_ID }}>
+  const initConsent = () => {
   const box = document.getElementById('consent');
   const KEY = 'alloyed-consent';
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
@@ -51,4 +52,6 @@ const GTM_ID = 'GTM-W3D6T5PL';
     })
   );
   document.querySelectorAll('[data-open-consent]').forEach((b) => b.addEventListener('click', () => { box.hidden = false; }));
+  };
+  document.addEventListener('astro:page-load', initConsent);
 </script>

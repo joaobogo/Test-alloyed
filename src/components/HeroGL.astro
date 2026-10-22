@@ -68,7 +68,7 @@ const { class: cls = '' } = Astro.props;
     canvas.classList.remove('opacity-0');
     wrap.querySelector('.hero-gl-fallback')?.classList.add('opacity-0');
   };
-  'requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200);
+  document.addEventListener('astro:page-load', () => { 'requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200); });
 </script>
 
 <style>

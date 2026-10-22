@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const c = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, deviceScaleFactor: 2 });
+const p = await c.newPage();
+await p.goto('http://127.0.0.1:4321/', { waitUntil: 'networkidle' });
+await p.evaluate(() => localStorage.setItem('alloyed-consent', '{"analytics":false}')); await p.reload({ waitUntil: 'networkidle' });
+await p.click('#nav-toggle'); await p.waitForTimeout(300);
+await p.screenshot({ path: '/tmp/shots/menu-m.png' });
+await p.goto('http://127.0.0.1:4321/#estimate', { waitUntil: 'networkidle' }); await p.waitForTimeout(600);
+await p.screenshot({ path: '/tmp/shots/calc-m.png' });
+const d = await b.newContext({ viewport: { width: 1440, height: 900 } }); const dp = await d.newPage();
+await dp.goto('http://127.0.0.1:4321/', { waitUntil: 'networkidle' }); await dp.evaluate(() => localStorage.setItem('alloyed-consent', '{"analytics":false}')); await dp.reload({ waitUntil: 'networkidle' });
+await dp.hover('nav a[href="/services/"]'); await dp.waitForTimeout(300); await dp.screenshot({ path: '/tmp/shots/menu-d.png' });
+await b.close(); console.log('ok');
