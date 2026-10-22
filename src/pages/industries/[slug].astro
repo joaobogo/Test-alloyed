@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
 import CaseCard from '../../components/CaseCard.astro';
+import IndustryFAQ, { faqFor } from '../../components/IndustryFAQ.astro';
 import { industries, serviceBySlug, caseBySlug, site } from '../../data/site';
 
 export function getStaticPaths() {
@@ -10,7 +11,7 @@ export function getStaticPaths() {
 const { ind } = Astro.props;
 const svcs = ind.services.map(serviceBySlug);
 const cases = ind.caseStudies.map(caseBySlug).filter(Boolean);
-const schema = [{ '@context': 'https://schema.org', '@type': 'Service', name: `Operations outsourcing for ${ind.name}`, description: ind.metaDescription, provider: { '@id': `${site.url}/#organization` }, audience: { '@type': 'BusinessAudience', name: ind.name }, url: `${site.url}/industries/${ind.slug}/` }];
+const schema = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqFor(ind).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }, { '@context': 'https://schema.org', '@type': 'Service', name: `Operations outsourcing for ${ind.name}`, description: ind.metaDescription, provider: { '@id': `${site.url}/#organization` }, audience: { '@type': 'BusinessAudience', name: ind.name }, url: `${site.url}/industries/${ind.slug}/` }];
 ---
 
 <Base title={ind.metaTitle} description={ind.metaDescription} ogImage={`/og/industries-${ind.slug}.png`} schema={schema} breadcrumbs={[{ name: 'Industries', href: '/industries/' }, { name: ind.name, href: `/industries/${ind.slug}/` }]}>
@@ -62,5 +63,6 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'Service', name: `O
       </div>
     </section>
   )}
+  <IndustryFAQ ind={ind} />
   <CTA interest={ind.name} />
 </Base>

@@ -38,6 +38,7 @@ const org = {
   telephone: site.phone,
   address: { '@type': 'PostalAddress', addressLocality: site.hq.city, addressRegion: site.hq.region, addressCountry: site.hq.country },
   sameAs: [site.linkedin],
+  contactPoint: [{ '@type': 'ContactPoint', telephone: site.phone, email: site.email, contactType: 'sales', areaServed: 'US', availableLanguage: ['English', 'Spanish'], hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:30', closes: '17:30' } }],
   numberOfEmployees: { '@type': 'QuantitativeValue', minValue: 1000, maxValue: 1500 },
   award: ['IAOP Global Outsourcing 100', 'Inc. 5000'],
   areaServed: ['US', 'CA', 'GB', 'EU'],
@@ -78,6 +79,8 @@ const website = {
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#0b1020" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="sitemap" href="/sitemap-index.xml" />
