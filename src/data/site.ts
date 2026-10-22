@@ -626,7 +626,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Advertising & Ad Tech',
     services: ['Operational Excellence', 'Compliance & Risk'],
     summary: 'Scalable outsourcing support kept a high-volume platform running through peak season without compromising quality.',
-    metrics: [{ value: 'Peak', label: 'season coverage' }, { value: 'Scalable', label: 'team model' }, { value: 'Consistent', label: 'quality' }],
+    metrics: [{ value: '100%', label: 'Alloyed Team utilization for three years' }, { value: '24–48h', label: 'business-hour SLA compliance for ticket completion' }, { value: '100%', label: 'accuracy rate across all deliverables over the last two quarters' }],
   },
   {
     slug: 'automating-quality-control-with-qa-outsourcing-auditor-tool',
@@ -635,7 +635,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Media & Publishers',
     services: ['Audit, QA & Verification', 'Automation Enablement'],
     summary: 'An auditor tool built by Alloyed automated quality control checks, reducing manual review time and catching errors before they reach clients.',
-    metrics: [{ value: 'Automated', label: 'QA checks' }, { value: 'Fewer', label: 'manual reviews' }, { value: 'Earlier', label: 'error detection' }],
+    metrics: [{ value: '40+', label: 'point QA report automated' }, { value: 'Fewer', label: 'manual reviews' }, { value: 'Earlier', label: 'error detection' }],
   },
   {
     slug: 'bpo-automation-of-global-sales-and-marketing-insights-strengthens-operational-efficiency',
@@ -644,7 +644,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Financial Services',
     services: ['Reporting & Analytics', 'Automation Enablement'],
     summary: 'Automated Power BI reporting on global sales and marketing insight replaced manual compilation and improved operational efficiency.',
-    metrics: [{ value: 'Automated', label: 'Power BI reporting' }, { value: 'Hours', label: 'saved weekly' }, { value: 'Global', label: 'coverage' }],
+    metrics: [{ value: '2,000+', label: 'sales professionals supported' }, { value: '40+', label: 'countries covered' }],
   },
   {
     slug: 'outsourcing-partner-automates-workflow-and-reporting-for-streamlined-client-delivery',
@@ -653,7 +653,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Financial Services',
     services: ['Automation Enablement', 'Reporting & Analytics'],
     summary: 'Workflow and hourly reporting automation streamlined client delivery and freed analysts for higher-value work.',
-    metrics: [{ value: 'Automated', label: 'hourly reporting' }, { value: 'Streamlined', label: 'delivery' }, { value: 'More', label: 'analyst capacity' }],
+    metrics: [{ value: '20', label: 'hours per week saved by team leads' }],
   },
   {
     slug: 'retail-media-network-improves-speed-to-market-by-outsourcing-creative-services-and-ad-operations',
@@ -675,7 +675,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Media & Publishers',
     services: ['Creative Production'],
     summary: 'Creative outsourcing scaled digital ad production and improved support for internal teams.',
-    metrics: [{ value: 'Scaled', label: 'ad production' }, { value: 'Better', label: 'internal support' }, { value: 'Consistent', label: 'brand QA' }],
+    metrics: [{ value: '95%+', label: 'utilization rate of the Alloyed Team' }, { value: '13', label: 'FTEs delivering evening and overnight support' }, { value: '2', label: 'website platforms engineered and implemented on HubSpot' }],
   },
   {
     slug: 'data-engineering-outsourcing-significantly-improves-client-workflow-efficiency-and-cost-savings',
@@ -725,7 +725,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Advertising & Ad Tech',
     services: ['Marketing Services'],
     summary: 'Flexible outsourced marketing operations supported scalability and business growth.',
-    metrics: [{ value: 'Flexible', label: 'scaling' }, { value: 'Growth', label: 'supported' }, { value: 'Lower', label: 'cost per task' }],
+    metrics: [{ value: '100%', label: 'client NPS score' }, { value: '133%', label: 'Alloyed headcount growth' }, { value: '100%', label: 'peer-to-peer QA' }],
   },
   {
     slug: 'how-sebpos-urgent-protection-of-financial-markets-turned-into-a-two-decade-services-partnership',
@@ -752,7 +752,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Retail Media & E-Commerce',
     services: ['Advertising Operations'],
     summary: 'A retail media network expanded into new regions with Alloyed handling the operational scale-up.',
-    metrics: [{ value: 'New', label: 'regions launched' }, { value: 'Scaled', label: 'operations' }, { value: 'Consistent', label: 'quality' }],
+    metrics: [{ value: 'Multi-region', label: 'retail media launch supported' }, { value: 'Scaled', label: 'operations' }, { value: 'Consistent', label: 'quality' }],
   },
   {
     slug: 'global-broadcaster-scales-ad-ops-with-major-cost-savings',
@@ -761,7 +761,7 @@ export const caseStudies: CaseStudy[] = [
     industry: 'Media & Publishers',
     services: ['Advertising Operations'],
     summary: 'A global broadcaster scaled advertising operations with Alloyed while achieving major cost savings.',
-    metrics: [{ value: 'Major', label: 'cost savings' }, { value: 'Scaled', label: 'ad ops' }, { value: 'Global', label: 'coverage' }],
+    metrics: [{ value: '4x', label: 'output, growing from 8 to 32 national advertisers without adding internal headcount' }, { value: '5+', label: 'additional business units supported since 2021' }, { value: '46,000', label: 'employees worldwide at this global broadcaster' }],
   },
 ];
 
