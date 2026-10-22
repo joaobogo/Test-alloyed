@@ -24,8 +24,8 @@ const year = new Date().getFullYear();
       <div class="mt-6 space-y-2 text-[14px]">
         <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="block text-white/85 hover:text-white">{site.phone}</a>
         <a href={`mailto:${site.email}`} class="block text-white/85 hover:text-white">{site.email}</a>
-        <p class="text-white/50">{site.hours}</p>
-        <p class="text-white/50">{site.hq.label}</p>
+        <p class="text-white/60">{site.hours}</p>
+        <p class="text-white/60">{site.hq.label}</p>
       </div>
       <a href={site.linkedin} rel="noopener" target="_blank" class="mt-5 inline-flex items-center gap-2 text-[14px] text-white/70 hover:text-white">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
       {nav.filter((n) => n.children).map((group) => (
         <div>
-          <h3 class="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">{group.label}</h3>
+          <p class="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">{group.label}</p>
           <ul class="mt-4 space-y-2.5">
             {group.children!.map((c) => (
               <li><a href={c.href} class="text-[14px] text-white/80 hover:text-white">{c.label}</a></li>
@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
         </div>
       ))}
       <div>
-        <h3 class="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">Insights</h3>
+        <p class="font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">Insights</p>
         <ul class="mt-4 space-y-2.5">
           <li><a href="/insights/case-studies/" class="text-[14px] text-white/80 hover:text-white">Case Studies</a></li>
           <li><a href="/automation/" class="text-[14px] text-white/80 hover:text-white">Automation Center of Excellence</a></li>
@@ -57,7 +57,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="border-t border-white/10">
-    <div class="container-x flex flex-col gap-3 py-6 text-[13px] text-white/45 sm:flex-row sm:items-center sm:justify-between">
+    <div class="container-x flex flex-col gap-3 py-6 text-[13px] text-white/60 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.legalName}. All rights reserved. Formerly SEBPO.</p>
       <div class="flex flex-wrap gap-x-5 gap-y-2">
         <a href="/privacy-policy/" class="hover:text-white">Privacy Policy</a>

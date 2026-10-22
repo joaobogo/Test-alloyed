@@ -17,14 +17,14 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'Service', name: `O
   <section class="relative overflow-hidden bg-ink-900 text-white">
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
     <div class="container-x relative py-20 sm:py-24">
-      <nav aria-label="Breadcrumb" class="text-[13px] text-white/50"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/industries/" class="hover:text-white">Industries</a> <span class="mx-1.5">/</span> <span class="text-white/80">{ind.name}</span></nav>
+      <nav aria-label="Breadcrumb" class="text-[13px] text-white/60"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/industries/" class="hover:text-white">Industries</a> <span class="mx-1.5">/</span> <span class="text-white/80">{ind.name}</span></nav>
       <p class="eyebrow-light mt-6">{ind.name}</p>
       <h1 class="h-display mt-3 max-w-[18ch] text-[40px] text-white sm:text-[56px]">{ind.headline}</h1>
       <p class="mt-5 max-w-[62ch] text-[17px] leading-relaxed text-white/75">{ind.intro}</p>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#contact" class="btn-ember !px-6">Talk to an operations expert</a></div>
-      <dl class="mt-12 grid max-w-3xl grid-cols-3 gap-4 border-t border-white/10 pt-8">
-        {ind.outcomes.map((o) => <div><dd class="h-display text-[30px] text-white sm:text-[38px]">{o.value}</dd><dt class="mt-1 text-[13px] text-white/60">{o.label}</dt></div>)}
-      </dl>
+      <ul class="mt-12 grid max-w-3xl grid-cols-3 gap-4 border-t border-white/10 pt-8">
+        {ind.outcomes.map((o) => <li><p class="h-display text-[30px] text-white sm:text-[38px]">{o.value}</p><p class="mt-1 text-[13px] text-white/60">{o.label}</p></li>)}
+      </ul>
     </div>
   </section>
 

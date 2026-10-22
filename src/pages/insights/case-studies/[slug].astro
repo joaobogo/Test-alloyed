@@ -17,22 +17,22 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline
   <article>
     <header class="bg-ink-900 py-20 text-white">
       <div class="container-x">
-        <nav aria-label="Breadcrumb" class="text-[13px] text-white/50"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/insights/case-studies/" class="hover:text-white">Case Studies</a></nav>
+        <nav aria-label="Breadcrumb" class="text-[13px] text-white/60"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/insights/case-studies/" class="hover:text-white">Case Studies</a></nav>
         <p class="eyebrow-light mt-6">Case study · {cs.industry}</p>
         <h1 class="h-display mt-3 max-w-[24ch] text-[36px] text-white sm:text-[50px]">{cs.title}</h1>
         <p class="mt-5 max-w-[64ch] text-[17px] leading-relaxed text-white/75">{cs.summary}</p>
-        <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-[14px]">
-          <div><dt class="text-white/45">Client</dt><dd class="font-medium text-white">{cs.client}</dd></div>
-          <div><dt class="text-white/45">Services</dt><dd class="font-medium text-white">{cs.services.join(' · ')}</dd></div>
-        </dl>
+        <ul class="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-[14px]">
+          <li><p class="text-white/60">Client</p><p class="font-medium text-white">{cs.client}</p></li>
+          <li><p class="text-white/60">Services</p><p class="font-medium text-white">{cs.services.join(' · ')}</p></li>
+        </ul>
       </div>
     </header>
 
     <section class="bg-ink-50 py-12">
       <div class="container-x">
-        <dl class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 sm:grid-cols-3">
-          {cs.metrics.map((m) => <div class="bg-white p-7"><dd class="h-display text-[44px] text-brand-600">{m.value}</dd><dt class="mt-1 text-[14.5px] font-medium text-ink-700">{m.label}</dt></div>)}
-        </dl>
+        <ul class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 sm:grid-cols-3">
+          {cs.metrics.map((m) => <li class="bg-white p-7"><p class="h-display text-[44px] text-brand-600">{m.value}</p><p class="mt-1 text-[14.5px] font-medium text-ink-700">{m.label}</p></li>)}
+        </ul>
       </div>
     </section>
 
@@ -44,7 +44,7 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline
           {cs.results && <div><p class="eyebrow">Results</p><h2 class="h-display mt-2 text-[30px]">Measurable outcomes</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.results.map((c) => <li class="flex gap-3"><svg class="mt-1.5 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{c}</li>)}</ul></div>}
           {!cs.challenge && <div><p class="eyebrow">Summary</p><h2 class="h-display mt-2 text-[30px]">The engagement</h2><p class="mt-4 text-[16.5px] leading-relaxed text-ink-800">{cs.summary}</p><p class="mt-4 text-[15px] text-ink-600">Want the full write-up with team structure, timeline and QA framework? Request it below and an operations expert will send it along with a first read on your own workflow.</p></div>}
         </div>
-        <aside class="lg:col-span-4">
+        <div class="lg:col-span-4">
           <div class="card sticky top-24 p-6">
             <p class="eyebrow">Similar challenge?</p>
             <h3 class="mt-2 text-[22px] font-bold">Let’s map your workflow.</h3>
@@ -52,7 +52,7 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline
             <a href="#contact" class="btn-ember mt-5 w-full">Talk to an operations expert</a>
             <a href="/insights/case-studies/" class="btn-ghost mt-2 w-full">More case studies</a>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
 

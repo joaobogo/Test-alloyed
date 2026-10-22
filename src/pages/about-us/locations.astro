@@ -11,9 +11,9 @@ const schema = locations.map((l) => ({ '@context': 'https://schema.org', '@type'
       <p class="eyebrow-light">Global delivery</p>
       <h1 class="h-display mt-3 max-w-[16ch] text-[42px] text-white sm:text-[58px]">Offshore and nearshore delivery centers with onshore management.</h1>
       <p class="mt-5 max-w-[62ch] text-[17px] text-white/75">Strategically positioned teams give 24/7 coverage across US, European and APAC time zones, with bilingual nearshore delivery in El Salvador for real-time collaboration.</p>
-      <dl class="mt-12 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-5">
-        {[['4', 'Delivery locations'], ['24/7', 'Coverage'], ['20+', 'Years operating'], ['92', 'Net Promoter Score'], ['98%', 'Client retention']].map(([v, l]) => <div><dd class="h-display text-[34px] text-white">{v}</dd><dt class="text-[13px] text-white/55">{l}</dt></div>)}
-      </dl>
+      <ul class="mt-12 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-5">
+        {[['4', 'Delivery locations'], ['24/7', 'Coverage'], ['20+', 'Years operating'], ['92', 'Net Promoter Score'], ['98%', 'Client retention']].map(([v, l]) => <li><p class="h-display text-[34px] text-white">{v}</p><p class="text-[13px] text-white/65">{l}</p></li>)}
+      </ul>
     </div>
   </section>
   <section class="py-20">

@@ -16,7 +16,7 @@ import { engagementModels, teamModel } from '../../data/site';
     <div class="container-x grid gap-5 md:grid-cols-3">
       {engagementModels.map((m, i) => (
         <div class="card reveal flex flex-col p-7">
-          <span class="font-display text-[13px] font-bold tracking-widest text-ember-500">0{i + 1}</span>
+          <span class="font-display text-[13px] font-bold tracking-widest text-ember-700">0{i + 1}</span>
           <h2 class="mt-3 text-[26px] font-bold">{m.name}</h2>
           <p class="mt-3 text-[15px] leading-relaxed text-ink-600">{m.text}</p>
           <ul class="mt-5 space-y-2 text-[14.5px] text-ink-800">{m.bullets.map((b) => <li class="flex gap-2.5"><svg class="mt-1 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{b}</li>)}</ul>

@@ -14,15 +14,15 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'ContactPage', url:
         <h1 class="h-display mt-3 text-[42px] text-white sm:text-[56px]">Let’s talk. We’re ready.</h1>
         <p class="mt-5 max-w-md text-[16.5px] leading-relaxed text-white/75">Questions about a service, a quote for a dedicated team, or a second opinion on an automation plan. An operations expert replies within one business day.</p>
         <dl class="mt-8 space-y-4 text-[15px]">
-          <div><dt class="text-white/45">Phone</dt><dd><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="font-medium text-white hover:underline">{site.phone}</a></dd></div>
-          <div><dt class="text-white/45">Email</dt><dd><a href={`mailto:${site.email}`} class="font-medium text-white hover:underline">{site.email}</a></dd></div>
-          <div><dt class="text-white/45">Hours</dt><dd class="text-white/85">{site.hours}</dd></div>
-          <div><dt class="text-white/45">Headquarters</dt><dd class="text-white/85">{site.hq.label}</dd></div>
+          <div><dt class="text-white/60">Phone</dt><dd><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="font-medium text-white hover:underline">{site.phone}</a></dd></div>
+          <div><dt class="text-white/60">Email</dt><dd><a href={`mailto:${site.email}`} class="font-medium text-white hover:underline">{site.email}</a></dd></div>
+          <div><dt class="text-white/60">Hours</dt><dd class="text-white/85">{site.hours}</dd></div>
+          <div><dt class="text-white/60">Headquarters</dt><dd class="text-white/85">{site.hq.label}</dd></div>
         </dl>
-        <ul class="mt-10 space-y-2 text-[13px] text-white/55">{proof.map((p) => <li>· {p.label}</li>)}</ul>
-        <p class="mt-8 text-[14px] text-white/55">Looking for a job? <a href="/about-us/careers/" class="text-white underline underline-offset-2">See open roles</a>.</p>
+        <ul class="mt-10 space-y-2 text-[13px] text-white/65">{proof.map((p) => <li>· {p.label}</li>)}</ul>
+        <p class="mt-8 text-[14px] text-white/65">Looking for a job? <a href="/about-us/careers/" class="text-white underline underline-offset-2">See open roles</a>.</p>
       </div>
-      <div class="lg:col-span-7"><LeadForm /></div>
+      <div class="lg:col-span-7"><LeadForm level="h2" /></div>
     </div>
   </section>
 </Base>

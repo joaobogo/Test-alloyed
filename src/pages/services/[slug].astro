@@ -31,7 +31,7 @@ const schema = [
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
     <div class="absolute -right-32 top-0 h-[480px] w-[480px] rounded-full bg-brand-600/30 blur-[120px]" aria-hidden="true"></div>
     <div class="container-x relative py-20 sm:py-24">
-      <nav aria-label="Breadcrumb" class="text-[13px] text-white/50"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/services/" class="hover:text-white">Services</a> <span class="mx-1.5">/</span> <span class="text-white/80">{s.name}</span></nav>
+      <nav aria-label="Breadcrumb" class="text-[13px] text-white/60"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/services/" class="hover:text-white">Services</a> <span class="mx-1.5">/</span> <span class="text-white/80">{s.name}</span></nav>
       <p class="eyebrow-light mt-6">{s.name}</p>
       <h1 class="h-display mt-3 max-w-[18ch] text-[40px] text-white sm:text-[56px]">{s.headline}</h1>
       <p class="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-white/75">{s.intro}</p>
@@ -45,15 +45,15 @@ const schema = [
   <section class="bg-ink-50 py-14">
     <div class="container-x">
       <p class="eyebrow">Measurable outcomes</p>
-      <dl class="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 lg:grid-cols-4">
+      <ul class="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 lg:grid-cols-4">
         {s.outcomes.map((o) => (
-          <div class="bg-white p-6">
-            <dd class="h-display text-[36px] text-brand-600 sm:text-[44px]">{o.value}</dd>
-            <dt class="mt-1 text-[14px] font-semibold text-ink-800">{o.label}</dt>
+          <li class="bg-white p-6">
+            <p class="h-display text-[36px] text-brand-600 sm:text-[44px]">{o.value}</p>
+            <p class="mt-1 text-[14px] font-semibold text-ink-800">{o.label}</p>
             <p class="mt-1 text-[12.5px] text-ink-500">{o.client}</p>
-          </div>
+          </li>
         ))}
-      </dl>
+      </ul>
     </div>
   </section>
 
@@ -75,7 +75,7 @@ const schema = [
         <h2 class="h-display mt-2 text-[32px] text-white sm:text-[40px]">How we help</h2>
         <p class="mt-4 text-[15px] leading-relaxed text-white/65">Each capability is delivered by a dedicated team with documented SOPs, QA checkpoints and KPI reporting.</p>
         <div class="mt-8">
-          <p class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/45">Coverage</p>
+          <p class="text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">Coverage</p>
           <ul class="mt-3 flex flex-wrap gap-2">{s.coverage.map((c) => <li class="rounded-full border border-white/15 px-3 py-1 text-[13px] text-white/80">{c}</li>)}</ul>
         </div>
       </div>
@@ -97,7 +97,7 @@ const schema = [
         <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">Three steps from intake to improvement.</h2>
         <ol class="mt-8 space-y-6">
           {process.map((p) => (
-            <li class="flex gap-4"><span class="font-display text-[13px] font-bold tracking-widest text-ember-500 pt-1">{p.n}</span><div><h3 class="text-[19px] font-bold">{p.title}</h3><p class="mt-1 text-[14.5px] leading-relaxed text-ink-600">{p.text}</p></div></li>
+            <li class="flex gap-4"><span class="font-display text-[13px] font-bold tracking-widest text-ember-700 pt-1">{p.n}</span><div><h3 class="text-[19px] font-bold">{p.title}</h3><p class="mt-1 text-[14.5px] leading-relaxed text-ink-600">{p.text}</p></div></li>
           ))}
         </ol>
       </div>
@@ -128,9 +128,9 @@ const schema = [
           {cs.results && <ul class="mt-5 space-y-2 text-[15px] text-ink-800">{cs.results.slice(0, 3).map((r) => <li class="flex gap-3"><svg class="mt-1 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{r}</li>)}</ul>}
           <a href={`/insights/case-studies/${cs.slug}/`} class="btn-primary mt-7">Read the full case study</a>
         </div>
-        <dl class="grid gap-3 lg:col-span-5">
-          {cs.metrics.map((m) => <div class="card p-5"><dd class="h-display text-[36px] text-brand-600">{m.value}</dd><dt class="text-[14px] text-ink-600">{m.label}</dt></div>)}
-        </dl>
+        <ul class="grid gap-3 lg:col-span-5">
+          {cs.metrics.map((m) => <li class="card p-5"><p class="h-display text-[36px] text-brand-600">{m.value}</p><p class="text-[14px] text-ink-600">{m.label}</p></li>)}
+        </ul>
       </div>
     </div>
   </section>

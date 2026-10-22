@@ -18,7 +18,7 @@ import { industries } from '../../data/site';
         <a href={`/industries/${ind.slug}/`} class="card group reveal flex flex-col p-7 hover:border-brand-200">
           <h2 class="text-[24px] font-bold group-hover:text-brand-700">{ind.name}</h2>
           <p class="mt-3 text-[14.5px] leading-relaxed text-ink-600">{ind.intro}</p>
-          <dl class="mt-6 grid grid-cols-3 gap-3 border-t border-ink-100 pt-5">{ind.outcomes.map((o) => <div><dd class="h-display text-[22px] text-brand-600">{o.value}</dd><dt class="text-[11.5px] text-ink-500">{o.label}</dt></div>)}</dl>
+          <ul class="mt-6 grid grid-cols-3 gap-3 border-t border-ink-100 pt-5">{ind.outcomes.map((o) => <li><p class="h-display text-[22px] text-brand-600">{o.value}</p><p class="text-[11.5px] text-ink-500">{o.label}</p></li>)}</ul>
         </a>
       ))}
     </div>

@@ -34,7 +34,8 @@
 
   --color-ember-400: #ff8a33;
   --color-ember-500: #ff6b00;
-  --color-ember-600: #e05d00;
+  --color-ember-600: #d85800;
+  --color-ember-700: #b64900;
 
   /* Neutrals: cool, deep ink for a serious enterprise feel */
   --color-ink-950: #070a16;
@@ -43,7 +44,7 @@
   --color-ink-700: #27304d;
   --color-ink-600: #3d476a;
   --color-ink-500: #5a6487;
-  --color-ink-400: #7f88a8;
+  --color-ink-400: #5f6888;
   --color-ink-300: #aab1c9;
   --color-ink-200: #d3d8e6;
   --color-ink-100: #e9ecf4;
@@ -85,7 +86,7 @@
   @apply btn bg-brand-600 text-white shadow-[0_1px_0_rgba(255,255,255,.2)_inset,0_8px_24px_-8px_rgba(51,44,242,.6)] hover:bg-brand-700 hover:-translate-y-px;
 }
 @utility btn-ember {
-  @apply btn bg-ember-500 text-white hover:bg-ember-600 hover:-translate-y-px shadow-[0_8px_24px_-8px_rgba(255,107,0,.6)];
+  @apply btn bg-ember-500 text-ink-950 hover:bg-ember-400 hover:-translate-y-px shadow-[0_8px_24px_-8px_rgba(255,107,0,.6)];
 }
 @utility btn-ghost {
   @apply btn border border-ink-200 bg-white text-ink-900 hover:border-ink-900;

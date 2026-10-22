@@ -1,18 +1,20 @@
 ---
 // One short form everywhere. Netlify Forms handles submission; hidden fields carry
 // the lead source captured in Base.astro. The honeypot replaces reCAPTCHA.
-interface Props { heading?: string; sub?: string; compact?: boolean; cta?: string; interest?: string }
+interface Props { heading?: string; sub?: string; compact?: boolean; cta?: string; interest?: string; level?: 'h2' | 'h3' }
 const {
   heading = 'Let’s look at your operations together.',
   sub = 'Tell us where performance is leaking. An operations expert replies within one business day with a first read and a proposed next step.',
   compact = false,
   cta = 'Talk to an operations expert',
   interest = '',
+  level = 'h3',
 } = Astro.props;
+const Heading = level;
 ---
 
 <div class:list={['card p-6 sm:p-8', compact && 'p-5 sm:p-6']}>
-  <h3 class="h-display text-[26px] sm:text-[30px]">{heading}</h3>
+  <Heading class="h-display text-[26px] sm:text-[30px]">{heading}</Heading>
   <p class="mt-2 text-[15px] text-ink-600">{sub}</p>
 
   <form

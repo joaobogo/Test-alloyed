@@ -67,19 +67,22 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   <div id="mobile-nav" hidden class="lg:hidden border-t border-white/10 bg-ink-900 text-white">
     <nav class="container-x py-4" aria-label="Mobile">
       {nav.map((item) => (
-        <details class="border-b border-white/10 py-1" open={isActive(item.href)}>
-          <summary class="flex cursor-pointer items-center justify-between py-3 text-[16px] font-semibold">
-            <a href={item.href} class="flex-1">{item.label}</a>
-            {item.children && <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>}
-          </summary>
-          {item.children && (
+        item.children ? (
+          <details class="border-b border-white/10 py-1" open={isActive(item.href)}>
+            <summary class="flex cursor-pointer items-center justify-between py-3 text-[16px] font-semibold">
+              {item.label}
+              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </summary>
             <ul class="pb-3 pl-3">
+              <li><a href={item.href} class="block py-2 text-[15px] font-semibold text-white">All {item.label.toLowerCase()}</a></li>
               {item.children.map((c) => (
                 <li><a href={c.href} class="block py-2 text-[15px] text-white/80">{c.label}</a></li>
               ))}
             </ul>
-          )}
-        </details>
+          </details>
+        ) : (
+          <a href={item.href} class="block border-b border-white/10 py-4 text-[16px] font-semibold">{item.label}</a>
+        )
       ))}
       <div class="mt-4 grid gap-3">
         <a href="/contact/" class="btn-ember w-full">Talk to an operations expert</a>
