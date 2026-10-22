@@ -43,7 +43,16 @@ export const nav = [
     ],
   },
   { label: 'Automation', href: '/automation/' },
-  { label: 'Case Studies', href: '/insights/case-studies/' },
+  {
+    label: 'Insights',
+    href: '/insights/',
+    children: [
+      { label: 'Case Studies', href: '/insights/case-studies/' },
+      { label: 'Perspectives', href: '/insights/perspectives/' },
+      { label: 'News', href: '/insights/news/' },
+      { label: 'Events & Webinars', href: '/insights/events/' },
+    ],
+  },
   {
     label: 'Company',
     href: '/about-us/',

@@ -1,0 +1,12 @@
+---
+import ArticleLayout from '../../../layouts/Article.astro';
+import { perspectives } from '../../../data/content';
+
+export function getStaticPaths() {
+  return perspectives.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const related = perspectives.filter((x) => x.slug !== a.slug).slice(0, 3);
+---
+
+<ArticleLayout article={a} kind="Perspective" basePath="/insights/perspectives/" related={related} />

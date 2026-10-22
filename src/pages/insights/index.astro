@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { perspectives, news, events, formatDate } from '../../data/content';
+import { caseStudies } from '../../data/site';
+const featured = caseStudies.filter((c) => c.featured).slice(0, 3);
+const today = new Date().toISOString().slice(0, 7);
+const upcoming = events.filter((e) => e.date.slice(0, 7) >= today).slice(0, 3);
+---
+
+<Base title="Insights: Case Studies, Perspectives, News & Events | Alloyed" description="Everything Alloyed publishes: 23 case studies with measurable outcomes, perspectives on automation and outsourcing, company news and upcoming events." breadcrumbs={[{ name: 'Insights', href: '/insights/' }]}>
+  <section class="bg-ink-900 py-16 text-white sm:py-20">
+    <div class="container-x">
+      <p class="eyebrow-light">Insights</p>
+      <h1 class="h-display mt-3 max-w-[16ch] text-[40px] text-white sm:text-[56px]">Proof, perspective and what’s next.</h1>
+      <nav class="mt-8 flex flex-wrap gap-2" aria-label="Insights sections">
+        {[['Case Studies', '/insights/case-studies/', caseStudies.length], ['Perspectives', '/insights/perspectives/', perspectives.length], ['News', '/insights/news/', news.length], ['Events', '/insights/events/', events.length]].map(([l, h, n]) => <a href={h as string} class="btn-ghost-light">{l} <span class="rounded-full bg-white/15 px-2 text-[12px]">{n}</span></a>)}
+      </nav>
+    </div>
+  </section>
+  <section class="py-16"><div class="container-x"><div class="flex items-end justify-between gap-4"><div><p class="eyebrow">Case studies</p><h2 class="h-display mt-2 text-[30px] sm:text-[38px]">Measurable outcomes</h2></div><a href="/insights/case-studies/" class="btn-ghost">All case studies</a></div><div class="mt-8 grid gap-5 md:grid-cols-3">{featured.map((c) => <CaseCard cs={c} />)}</div></div></section>
+  <section class="bg-ink-50 py-16"><div class="container-x"><div class="flex items-end justify-between gap-4"><div><p class="eyebrow">Perspectives</p><h2 class="h-display mt-2 text-[30px] sm:text-[38px]">Latest thinking</h2></div><a href="/insights/perspectives/" class="btn-ghost">All perspectives</a></div><div class="mt-8 grid gap-5 md:grid-cols-3">{perspectives.slice(0, 3).map((a) => <ArticleCard href={`/insights/perspectives/${a.slug}/`} kicker="Perspective" title={a.title} excerpt={a.excerpt} date={a.date} tags={a.tags} />)}</div></div></section>
+  <section class="py-16"><div class="container-x grid gap-12 lg:grid-cols-2">
+    <div><div class="flex items-end justify-between gap-4"><div><p class="eyebrow">News</p><h2 class="h-display mt-2 text-[30px]">Announcements</h2></div><a href="/insights/news/" class="btn-ghost">All news</a></div>
+      <ol class="mt-6 divide-y divide-ink-100 rounded-2xl border border-ink-100">{news.slice(0, 4).map((a) => <li><a href={`/insights/news/${a.slug}/`} class="group block p-5 hover:bg-brand-50/40"><time datetime={a.date} class="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-500">{formatDate(a.date, { month: 'short', day: 'numeric', year: 'numeric' })}</time><h3 class="mt-1 font-sans text-[16px] font-semibold leading-snug text-ink-900 group-hover:text-brand-700">{a.title}</h3></a></li>)}</ol></div>
+    <div><div class="flex items-end justify-between gap-4"><div><p class="eyebrow">Events</p><h2 class="h-display mt-2 text-[30px]">Meet us</h2></div><a href="/insights/events/" class="btn-ghost">All events</a></div>
+      <ol class="mt-6 divide-y divide-ink-100 rounded-2xl border border-ink-100">{(upcoming.length ? upcoming : events.slice(0, 3)).map((e) => <li class="p-5"><div class="flex gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-500"><time datetime={e.date}>{formatDate(e.date)}</time><span>·</span><span>{e.type}</span></div><h3 class="mt-1 font-sans text-[16px] font-semibold leading-snug text-ink-900">{e.title.replace(/^\[Webinar\]\s*/, '').replace(/^Meet Us:\s*/, '')}</h3></li>)}</ol></div>
+  </div></section>
+  <CTA />
+</Base>

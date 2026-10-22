@@ -1,0 +1,33 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CTA from '../../../components/CTA.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { perspectives, formatDate, readingTime } from '../../../data/content';
+const [lead, ...rest] = perspectives;
+---
+
+<Base title="Perspectives on Outsourcing, Automation & Operations | Alloyed" description="Thinking from Alloyed on human-in-the-loop automation, AI in media operations, shared services trends and how to automate operations from the ground up." breadcrumbs={[{ name: 'Insights', href: '/insights/' }, { name: 'Perspectives', href: '/insights/perspectives/' }]}>
+  <section class="bg-ink-900 py-16 text-white sm:py-20">
+    <div class="container-x">
+      <p class="eyebrow-light">Perspectives</p>
+      <h1 class="h-display mt-3 max-w-[18ch] text-[40px] text-white sm:text-[56px]">How operations leaders get automation right.</h1>
+      <p class="mt-5 max-w-[60ch] text-[17px] text-white/75">Field notes from twenty years of running other companies’ workflows: process first, people in the loop, results you can measure.</p>
+    </div>
+  </section>
+  <section class="py-14">
+    <div class="container-x">
+      <a href={`/insights/perspectives/${lead.slug}/`} class="card lift group grid gap-8 p-8 lg:grid-cols-12">
+        <div class="lg:col-span-8">
+          <div class="flex flex-wrap items-center gap-3 text-[13px] text-ink-500"><span class="rounded-full bg-ember-500 px-2.5 py-1 font-semibold text-ink-950">Latest</span><time datetime={lead.date}>{formatDate(lead.date)}</time><span>·</span><span>{readingTime(lead.bodyMarkdown)}</span></div>
+          <h2 class="h-display mt-4 text-[28px] group-hover:text-brand-700 sm:text-[36px]">{lead.title}</h2>
+          <p class="mt-3 text-[16px] leading-relaxed text-ink-600">{lead.excerpt}</p>
+        </div>
+        <ul class="flex flex-wrap gap-2 self-end lg:col-span-4 lg:justify-end">{lead.tags.map((t) => <li class="rounded-full bg-ink-50 px-3 py-1 text-[12.5px] font-medium text-ink-600">{t}</li>)}</ul>
+      </a>
+      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {rest.map((a) => <ArticleCard href={`/insights/perspectives/${a.slug}/`} kicker="Perspective" title={a.title} excerpt={a.excerpt} date={a.date} tags={a.tags} level="h2" />)}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Base>

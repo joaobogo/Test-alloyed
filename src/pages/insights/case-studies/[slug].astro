@@ -3,54 +3,96 @@ import Base from '../../../layouts/Base.astro';
 import CTA from '../../../components/CTA.astro';
 import CaseCard from '../../../components/CaseCard.astro';
 import { caseStudies, site } from '../../../data/site';
+import { caseContentBySlug } from '../../../data/content';
 
 export function getStaticPaths() {
   return caseStudies.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
 }
 const { cs } = Astro.props;
+// Prefer the full scraped write-up; fall back to the curated summary data.
+const full = caseContentBySlug(cs.slug);
+const challenge = full?.challenge?.length ? full.challenge : cs.challenge;
+const solution = full?.solution?.length ? full.solution : cs.solution;
+const results = full?.results?.length ? full.results : cs.results;
+const impact = full?.impact ?? [];
+const metrics = full?.metrics?.length ? full.metrics : cs.metrics;
+const intro = full?.intro || cs.summary;
+const description = (full?.metaDescription || cs.summary).slice(0, 158);
 const related = caseStudies.filter((c) => c.slug !== cs.slug && c.industry === cs.industry).slice(0, 3);
 const title = cs.title.length > 58 ? `${cs.title.slice(0, 55).trim()}… | Alloyed` : `${cs.title} | Alloyed`;
-const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: cs.title, description: cs.summary, author: { '@id': `${site.url}/#organization` }, publisher: { '@id': `${site.url}/#organization` }, mainEntityOfPage: `${site.url}/insights/case-studies/${cs.slug}/`, about: cs.industry }];
+const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: cs.title, description, author: { '@id': `${site.url}/#organization` }, publisher: { '@id': `${site.url}/#organization` }, mainEntityOfPage: `${site.url}/insights/case-studies/${cs.slug}/`, about: cs.industry }];
+const sections: [string, string, string[] | undefined, string][] = [
+  ['Challenge', 'What the client was up against', challenge, 'bg-ember-500'],
+  ['Solution', 'What Alloyed did', solution, 'bg-brand-600'],
+  ['Results', 'Measurable outcomes', results, 'check'],
+  ['Impact', 'What changed for the business', impact, 'bg-mint-500'],
+];
+const isBullet = (s: string) => s.length < 220 && !/[.!?]\s+[A-Z]/.test(s);
+const lead = (s: string) => s.replace(/^\*\*(.+?):?\*\*:?\s*/, '<strong class="text-ink-900">$1:</strong> ').replace(/^([A-Z][A-Za-z&,/ ]{2,40}):\s/, '<strong class="text-ink-900">$1:</strong> ');
+const bold = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong class="text-ink-900">$1</strong>');
 ---
 
-<Base title={title} description={cs.summary.slice(0, 158)} ogType="article" schema={schema} breadcrumbs={[{ name: 'Case Studies', href: '/insights/case-studies/' }, { name: cs.title, href: `/insights/case-studies/${cs.slug}/` }]}>
+<Base title={title} description={description} ogType="article" schema={schema} breadcrumbs={[{ name: 'Insights', href: '/insights/' }, { name: 'Case Studies', href: '/insights/case-studies/' }, { name: cs.title, href: `/insights/case-studies/${cs.slug}/` }]}>
   <article>
-    <header class="bg-ink-900 py-20 text-white">
-      <div class="container-x">
-        <nav aria-label="Breadcrumb" class="text-[13px] text-white/60"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/insights/case-studies/" class="hover:text-white">Case Studies</a></nav>
+    <header class="relative overflow-hidden bg-ink-900 py-16 text-white sm:py-20">
+      <div class="absolute inset-0 grid-bg opacity-30" aria-hidden="true"></div>
+      <div class="container-x relative">
+        <nav aria-label="Breadcrumb" class="text-[13px] text-white/60"><a href="/" class="hover:text-white">Home</a> <span class="mx-1.5">/</span> <a href="/insights/" class="hover:text-white">Insights</a> <span class="mx-1.5">/</span> <a href="/insights/case-studies/" class="hover:text-white">Case Studies</a></nav>
         <p class="eyebrow-light mt-6">Case study · {cs.industry}</p>
-        <h1 class="h-display mt-3 max-w-[24ch] text-[36px] text-white sm:text-[50px]">{cs.title}</h1>
-        <p class="mt-5 max-w-[64ch] text-[17px] leading-relaxed text-white/75">{cs.summary}</p>
-        <ul class="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-[14px]">
-          <li><p class="text-white/60">Client</p><p class="font-medium text-white">{cs.client}</p></li>
-          <li><p class="text-white/60">Services</p><p class="font-medium text-white">{cs.services.join(' · ')}</p></li>
-        </ul>
+        <h1 class="h-display mt-3 max-w-[24ch] text-[34px] text-white sm:text-[48px]">{cs.title}</h1>
+        <p class="mt-5 max-w-[66ch] text-[17px] leading-relaxed text-white/75">{intro}</p>
+        <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-[14px]">
+          <div><dt class="text-white/60">Client</dt><dd class="font-medium text-white">{cs.client}{full?.size ? ` · ${full.size}` : ''}</dd></div>
+          <div><dt class="text-white/60">Services</dt><dd class="font-medium text-white">{(full?.services?.length ? full.services : cs.services).join(' · ')}</dd></div>
+        </dl>
       </div>
     </header>
 
     <section class="bg-ink-50 py-12">
       <div class="container-x">
         <ul class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 sm:grid-cols-3">
-          {cs.metrics.map((m) => <li class="bg-white p-7"><p class="h-display text-[44px] text-brand-600">{m.value}</p><p class="mt-1 text-[14.5px] font-medium text-ink-700">{m.label}</p></li>)}
+          {metrics.slice(0, 3).map((m) => <li class="bg-white p-7"><p class="h-display text-[44px] text-brand-600">{m.value}</p><p class="mt-1 text-[14.5px] font-medium text-ink-700">{m.label}</p></li>)}
         </ul>
       </div>
     </section>
 
     <section class="py-16">
       <div class="container-x grid gap-12 lg:grid-cols-12">
-        <div class="prose-alloyed lg:col-span-8 space-y-12">
-          {cs.challenge && <div><p class="eyebrow">Challenge</p><h2 class="h-display mt-2 text-[30px]">What the client was up against</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.challenge.map((c) => <li class="flex gap-3"><span class="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-ember-500"></span>{c}</li>)}</ul></div>}
-          {cs.solution && <div><p class="eyebrow">Solution</p><h2 class="h-display mt-2 text-[30px]">What Alloyed did</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.solution.map((c) => <li class="flex gap-3"><span class="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600"></span>{c}</li>)}</ul></div>}
-          {cs.results && <div><p class="eyebrow">Results</p><h2 class="h-display mt-2 text-[30px]">Measurable outcomes</h2><ul class="mt-5 space-y-2.5 text-[16px] leading-relaxed text-ink-800">{cs.results.map((c) => <li class="flex gap-3"><svg class="mt-1.5 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{c}</li>)}</ul></div>}
-          {!cs.challenge && <div><p class="eyebrow">Summary</p><h2 class="h-display mt-2 text-[30px]">The engagement</h2><p class="mt-4 text-[16.5px] leading-relaxed text-ink-800">{cs.summary}</p><p class="mt-4 text-[15px] text-ink-600">Want the full write-up with team structure, timeline and QA framework? Request it below and an operations expert will send it along with a first read on your own workflow.</p></div>}
+        <div class="space-y-14 lg:col-span-8">
+          {sections.filter(([, , items]) => items && items.length).map(([kicker, heading, items, marker]) => (
+            <div>
+              <p class="eyebrow">{kicker}</p>
+              <h2 class="h-display mt-2 text-[30px]">{heading}</h2>
+              <div class="mt-5 space-y-3">
+                {items!.map((c) => isBullet(c) ? (
+                  <p class="flex gap-3 text-[16px] leading-relaxed text-ink-800">
+                    {marker === 'check' ? <svg class="mt-1.5 shrink-0 text-mint-500" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> : <span class:list={['mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full', marker]}></span>}
+                    <span set:html={lead(c)} />
+                  </p>
+                ) : (
+                  <p class="text-[16.5px] leading-[1.75] text-ink-700" set:html={bold(c)} />
+                ))}
+              </div>
+            </div>
+          ))}
+          {full?.testimonial && (
+            <figure class="rounded-2xl border border-ink-100 bg-ink-50 p-7">
+              <blockquote class="text-[19px] leading-relaxed text-ink-900">“{full.testimonial.quote}”</blockquote>
+              <figcaption class="mt-4 text-[13.5px] font-semibold text-ink-600">{full.testimonial.attribution}</figcaption>
+            </figure>
+          )}
         </div>
         <div class="lg:col-span-4">
-          <div class="card sticky top-24 p-6">
-            <p class="eyebrow">Similar challenge?</p>
-            <h3 class="mt-2 text-[22px] font-bold">Let’s map your workflow.</h3>
-            <p class="mt-2 text-[14px] text-ink-600">A 30-minute working session with an operations expert. We size the opportunity and tell you whether Alloyed is the right fit.</p>
-            <a href="#contact" class="btn-ember mt-5 w-full">Talk to an operations expert</a>
-            <a href="/insights/case-studies/" class="btn-ghost mt-2 w-full">More case studies</a>
+          <div class="sticky top-24 space-y-4">
+            {full?.pdf && <a href={full.pdf} rel="noopener" class="card flex items-center gap-4 p-5 hover:border-brand-200"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="block text-[15px] font-semibold text-ink-900">Download the one-page summary</span><span class="text-[13px] text-ink-500">PDF</span></span></a>}
+            <div class="card p-6">
+              <p class="eyebrow">Similar challenge?</p>
+              <h2 class="mt-2 text-[22px] font-bold">Let’s map your workflow.</h2>
+              <p class="mt-2 text-[14px] text-ink-600">A 30-minute working session with an operations expert. We size the opportunity and tell you whether Alloyed is the right fit.</p>
+              <a href="#contact" class="btn-ember mt-5 w-full">Talk to an operations expert</a>
+              <a href="/insights/case-studies/" class="btn-ghost mt-2 w-full">More case studies</a>
+            </div>
+            {full?.proofPoints?.length ? <ul class="card space-y-2 p-6 text-[14px] text-ink-700">{full.proofPoints.map((p) => <li class="flex gap-2"><span class="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-ember-500"></span>{p}</li>)}</ul> : null}
           </div>
         </div>
       </div>

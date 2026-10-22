@@ -1,0 +1,12 @@
+---
+import ArticleLayout from '../../../layouts/Article.astro';
+import { news } from '../../../data/content';
+
+export function getStaticPaths() {
+  return news.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const related = news.filter((x) => x.slug !== a.slug).slice(0, 3);
+---
+
+<ArticleLayout article={a} kind="News" basePath="/insights/news/" related={related} />

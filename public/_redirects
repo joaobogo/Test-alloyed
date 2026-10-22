@@ -9,6 +9,7 @@ https://www.alloyed.io/*  https://alloyed.io/:splat  301!
 /case-study/*           /insights/case-studies/:splat  301
 /insights/case-studies/how-sebpo-scaled-media-organizations-advertising-operations-while-cutting-hiring-costs-by-70/  /insights/case-studies/how-alloyed-cut-media-ad-ops-hiring-costs-by-70/  301
 /campaigns/client-success/  /insights/case-studies/  301
+/insights/perspectives/why-most-ai-initiatives-in-media-operations-fail-and-what-actually-works-2/  /insights/perspectives/why-most-ai-initiatives-in-media-operations-fail-and-what-actually-works/  301
 
 # --- sebpo.com -> alloyed.io map. Deploy this same file on the sebpo.com
 #     host so every legacy URL lands on its closest page with a permanent 301.
