@@ -1,0 +1,68 @@
+---
+// Animated "how work flows through Alloyed" diagram. Pure SVG + CSS: dashed
+// paths animate their offset so work appears to move from your systems,
+// through ingest / analyze / optimize, to measured outcomes.
+import { process } from '../data/site';
+const inputs = ['Your platforms', 'Tickets & queues', 'Documents & data', 'Campaign briefs'];
+const outputs = [['99.99%', 'QA accuracy'], ['Weekly', 'KPI reporting'], ['~70%', 'lower cost'], ['24/7', 'coverage']];
+---
+
+<div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+  <ul class="grid grid-cols-2 gap-3 lg:col-span-2 lg:grid-cols-1" aria-label="Inputs">
+    {inputs.map((i) => <li class="rounded-xl border border-ink-100 bg-white px-4 py-3 text-[13.5px] font-medium text-ink-800">{i}</li>)}
+  </ul>
+
+  <div class="relative lg:col-span-8">
+    <svg viewBox="0 0 900 300" class="flow w-full" aria-hidden="true">
+      <defs>
+        <linearGradient id="pf-g" x1="0" x2="1"><stop offset="0" stop-color="#332cf2"/><stop offset="1" stop-color="#ff6b00"/></linearGradient>
+        <filter id="pf-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      {/* input rails converge into the pipeline */}
+      {[40, 110, 190, 260].map((y) => (
+        <path class="rail" d={`M0 ${y} C 90 ${y}, 110 150, 180 150`} fill="none" stroke="#c0c5ff" stroke-width="2" stroke-dasharray="6 10" />
+      ))}
+      {/* pipeline spine */}
+      <path d="M180 150 H 720" fill="none" stroke="#e9ecf4" stroke-width="14" stroke-linecap="round" />
+      <path class="spine" d="M180 150 H 720" fill="none" stroke="url(#pf-g)" stroke-width="4" stroke-linecap="round" stroke-dasharray="18 22" filter="url(#pf-glow)" />
+      {/* output rails */}
+      {[40, 110, 190, 260].map((y) => (
+        <path class="rail out" d={`M720 150 C 790 150, 810 ${y}, 900 ${y}`} fill="none" stroke="#ffd1b0" stroke-width="2" stroke-dasharray="6 10" />
+      ))}
+      {/* stage nodes */}
+      {process.map((p, i) => {
+        const x = 270 + i * 180;
+        return (
+          <g class="node" style={`--i:${i}`}>
+            <circle cx={x} cy="150" r="46" fill="#0b1020" />
+            <circle cx={x} cy="150" r="46" fill="none" stroke="url(#pf-g)" stroke-width="2" />
+            <circle class="pulse" cx={x} cy="150" r="46" fill="none" stroke="#332cf2" stroke-width="2" opacity=".5" />
+            <text x={x} y="143" text-anchor="middle" font-family="Archivo, Inter, sans-serif" font-weight="700" font-size="11" letter-spacing="2" fill="#ff8a33">{p.n}</text>
+            <text x={x} y="163" text-anchor="middle" font-family="Archivo, Inter, sans-serif" font-weight="700" font-size="16" fill="#fff">{p.title}</text>
+          </g>
+        );
+      })}
+      {/* human-in-the-loop + QA tags under the spine */}
+      {[['People', 270], ['Process', 450], ['Technology', 630]].map(([t, x]) => (
+        <text x={x} y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#5a6487">{t}</text>
+      ))}
+    </svg>
+    <div class="mt-4 grid gap-4 sm:grid-cols-3">
+      {process.map((p) => <div><h3 class="text-[17px] font-bold">{p.title}</h3><p class="mt-1 text-[13.5px] leading-relaxed text-ink-600">{p.text}</p></div>)}
+    </div>
+  </div>
+
+  <ul class="grid grid-cols-2 gap-3 lg:col-span-2 lg:grid-cols-1" aria-label="Outcomes">
+    {outputs.map(([v, l]) => <li class="rounded-xl border border-brand-100 bg-brand-50 px-4 py-3"><span class="h-display block text-[22px] text-brand-700">{v}</span><span class="text-[12.5px] font-medium text-ink-600">{l}</span></li>)}
+  </ul>
+</div>
+
+<style>
+  .rail { animation: dash 2.4s linear infinite; }
+  .rail.out { animation-duration: 2s; }
+  .spine { animation: dash 1.2s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -40; } }
+  .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 2.8s ease-out infinite; animation-delay: calc(var(--i, 0) * .5s); }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(1.5); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .rail, .spine, .pulse { animation: none; } }
+</style>

@@ -9,6 +9,7 @@ import Testimonials from '../components/Testimonials.astro';
 import Comparison from '../components/Comparison.astro';
 import CostCalculator from '../components/CostCalculator.astro';
 import Timeline from '../components/Timeline.astro';
+import ProcessFlow from '../components/ProcessFlow.astro';
 import CTA from '../components/CTA.astro';
 import { services, industries, caseStudies, proof, partners, site } from '../data/site';
 
@@ -154,6 +155,18 @@ const whys = [
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS FLOW -->
+  <section class="py-20 sm:py-28">
+    <div class="container-x">
+      <div class="max-w-2xl">
+        <p class="eyebrow">How delivery works</p>
+        <h2 class="h-display mt-2 text-[34px] sm:text-[46px]">Work goes in. Measured outcomes come out.</h2>
+        <p class="mt-4 text-[16px] leading-relaxed text-ink-600">We call it cognitive process orchestration: an operations control center that routes work, enforces quality and aligns people and automation for the best result.</p>
+      </div>
+      <div class="mt-12 reveal"><ProcessFlow /></div>
     </div>
   </section>
 

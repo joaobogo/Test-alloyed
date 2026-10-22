@@ -55,7 +55,16 @@ const normalizeLinks = (md: string) =>
     .replace(/\(\/insights\/events\/[^)]+\)/g, '(/insights/events/)')
     .replace(/\(\/insights\/perspectives\/why-most-ai-initiatives-in-media-operations-fail-and-what-actually-works-2\/\)/g, '(/insights/perspectives/why-most-ai-initiatives-in-media-operations-fail-and-what-actually-works/)');
 
-export const renderMarkdown = (md: string) => marked.parse(normalizeLinks(md)) as string;
+// Articles start at h1 on the page, so body headings are shifted to begin at h2.
+const normalizeHeadings = (md: string) => {
+  const levels = [...md.matchAll(/^(#{1,6})\s/gm)].map((m) => m[1].length);
+  if (!levels.length) return md;
+  const shift = 2 - Math.min(...levels);
+  if (shift <= 0) return md;
+  return md.replace(/^(#{1,6})(\s)/gm, (_m, h, sp) => '#'.repeat(Math.min(6, h.length + shift)) + sp);
+};
+
+export const renderMarkdown = (md: string) => marked.parse(normalizeHeadings(normalizeLinks(md))) as string;
 
 export const formatDate = (iso: string, opts: Intl.DateTimeFormatOptions = { month: 'long', year: 'numeric' }) =>
   new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { ...opts, timeZone: 'UTC' });

@@ -50,7 +50,7 @@ const crumbs = [{ name: 'Insights', href: '/insights/' }, { name: kind === 'News
 
     <div class="container-x grid gap-12 py-14 lg:grid-cols-12">
       <div class="prose-alloyed lg:col-span-8" set:html={html} />
-      <aside class="lg:col-span-4">
+      <div class="lg:col-span-4">
         <div class="sticky top-24 space-y-4">
           {a.pdf && <a href={a.pdf} class="card flex items-center gap-4 p-5 hover:border-brand-200" rel="noopener"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="block text-[15px] font-semibold text-ink-900">Download the brief</span><span class="text-[13px] text-ink-500">PDF</span></span></a>}
           <div class="card p-6">
@@ -68,7 +68,7 @@ const crumbs = [{ name: 'Insights', href: '/insights/' }, { name: kind === 'News
             </div>
           </div>
         </div>
-      </aside>
+      </div>
     </div>
 
     {related.length > 0 && (
