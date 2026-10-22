@@ -1,7 +1,9 @@
 ---
 // Compact consent banner. Tags stay blocked until "Accept"; "Reject" is honored
 // (Consent Mode v2 stays denied and GTM is never loaded).
-const GTM_ID = 'GTM-W3D6T5PL';
+// Set PUBLIC_GTM_ID at build time (Netlify env var). Left empty, no tags load,
+// which keeps demo traffic out of the client's analytics.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID || '';
 ---
 
 <div
@@ -27,7 +29,7 @@ const GTM_ID = 'GTM-W3D6T5PL';
   const KEY = 'alloyed-consent';
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
   const loadTags = () => {
-    if (window.__gtmLoaded) return;
+    if (!GTM_ID || window.__gtmLoaded) return;
     window.__gtmLoaded = true;
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
     const s = document.createElement('script');

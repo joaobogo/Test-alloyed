@@ -4,3 +4,5 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Set the client's container ID in the Netlify UI to enable analytics:
+  # PUBLIC_GTM_ID = "GTM-XXXXXXX"
