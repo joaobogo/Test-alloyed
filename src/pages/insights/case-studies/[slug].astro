@@ -32,7 +32,7 @@ const lead = (s: string) => s.replace(/^\*\*(.+?):?\*\*:?\s*/, '<strong class="t
 const bold = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong class="text-ink-900">$1</strong>');
 ---
 
-<Base title={title} description={description} ogType="article" schema={schema} breadcrumbs={[{ name: 'Insights', href: '/insights/' }, { name: 'Case Studies', href: '/insights/case-studies/' }, { name: cs.title, href: `/insights/case-studies/${cs.slug}/` }]}>
+<Base title={title} description={description} ogImage={`/og/case-${cs.slug.slice(0, 60)}.png`} ogType="article" schema={schema} breadcrumbs={[{ name: 'Insights', href: '/insights/' }, { name: 'Case Studies', href: '/insights/case-studies/' }, { name: cs.title, href: `/insights/case-studies/${cs.slug}/` }]}>
   <article>
     <header class="relative overflow-hidden bg-ink-900 py-16 text-white sm:py-20">
       <div class="absolute inset-0 grid-bg opacity-30" aria-hidden="true"></div>

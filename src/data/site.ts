@@ -43,6 +43,7 @@ export const nav = [
     ],
   },
   { label: 'Automation', href: '/automation/' },
+  { label: 'Pricing', href: '/pricing/' },
   {
     label: 'Insights',
     href: '/insights/',
@@ -59,6 +60,7 @@ export const nav = [
     children: [
       { label: 'Who We Are', href: '/about-us/' },
       { label: 'Engagement Models', href: '/about-us/engagement-models/' },
+      { label: 'Pricing', href: '/pricing/' },
       { label: 'Global Delivery', href: '/about-us/locations/' },
       { label: 'Technology Partners', href: '/about-us/our-partners/' },
       { label: 'Careers', href: '/about-us/careers/' },
