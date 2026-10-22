@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
+/* Subset to Latin; Archivo is a static 700 instance since headings only use it bold. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400 700;
   font-display: swap;
-  src: url("/fonts/inter-latin.woff2") format("woff2");
+  src: url("/fonts/inter-var.woff2") format("woff2");
 }
 @font-face {
   font-family: "Archivo";
   font-style: normal;
-  font-weight: 100 900;
-  font-stretch: 62% 125%;
+  font-weight: 500 800;
   font-display: swap;
-  src: url("/fonts/archivo-latin.woff2") format("woff2");
+  src: url("/fonts/archivo-700.woff2") format("woff2");
 }
 
 @theme {

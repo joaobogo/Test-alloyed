@@ -13,8 +13,8 @@ const cards = [
 import { services, industries, caseStudies } from '../src/data/site.ts';
 
 const html = (c) => `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Archivo;src:url(${font('archivo-latin.woff2')});font-weight:100 900;font-stretch:62% 125%}
-@font-face{font-family:Inter;src:url(${font('inter-latin.woff2')});font-weight:100 900}
+@font-face{font-family:Archivo;src:url(${font('archivo-700.woff2')});font-weight:500 800}
+@font-face{font-family:Inter;src:url(${font('inter-var.woff2')});font-weight:400 700}
 html,body{margin:0}body{width:1200px;height:630px;background:#0b1020;color:#fff;font-family:Inter,sans-serif;position:relative;overflow:hidden}
 .grid{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px}
 .glow{position:absolute;right:-160px;top:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(51,44,242,.55),rgba(51,44,242,0) 70%)}
