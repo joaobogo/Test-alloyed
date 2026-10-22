@@ -14,9 +14,10 @@ interface Props {
   breadcrumbs?: { name: string; href: string }[];
   dark?: boolean;
   ogImage?: string;
+  lang?: string;
 }
 
-const { title, description, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true, ogImage: og = '/og-default.png' } = Astro.props;
+const { title, description, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true, ogImage: og = '/og-default.png', lang = 'en' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(og, Astro.site).href;
 
@@ -65,7 +66,7 @@ const website = {
 ---
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang={lang} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -96,6 +97,7 @@ const website = {
     <script type="application/ld+json" set:html={JSON.stringify(website)} />
     {crumbs && <script type="application/ld+json" set:html={JSON.stringify(crumbs)} />}
     {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
 
     <script is:inline>
       document.documentElement.classList.remove('no-js');

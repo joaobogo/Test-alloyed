@@ -5,7 +5,7 @@ import { mkdirSync, readFileSync } from 'fs';
 import { pathToFileURL } from 'url';
 
 const logo = readFileSync('public/logo-white.svg', 'utf8');
-const font = (f) => `data:font/woff2;base64,${readFileSync(`public/fonts/${f}`).toString('base64')}`;
+const font = (f) => `http://127.0.0.1:4321/fonts/${f}`; // served by `astro preview`
 
 const cards = [
   { file: 'og-default.png', kicker: 'Formerly SEBPO · Operating since 2006', title: 'Outsourced ad operations, finance and compliance teams for media and advertising companies.', stat: '92', statLabel: 'Net Promoter Score' },
@@ -13,8 +13,8 @@ const cards = [
 import { services, industries } from '../src/data/site.ts';
 
 const html = (c) => `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Archivo;src:url(${font('archivo-latin.woff2')});font-weight:500 800;font-stretch:100% 125%}
-@font-face{font-family:Inter;src:url(${font('inter-latin.woff2')});font-weight:400 700}
+@font-face{font-family:Archivo;src:url(${font('archivo-latin.woff2')});font-weight:100 900;font-stretch:62% 125%}
+@font-face{font-family:Inter;src:url(${font('inter-latin.woff2')});font-weight:100 900}
 html,body{margin:0}body{width:1200px;height:630px;background:#0b1020;color:#fff;font-family:Inter,sans-serif;position:relative;overflow:hidden}
 .grid{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px}
 .glow{position:absolute;right:-160px;top:-160px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(51,44,242,.55),rgba(51,44,242,0) 70%)}
@@ -39,8 +39,9 @@ mkdirSync('public/og', { recursive: true });
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
 for (const c of cards) {
+  await p.goto('http://127.0.0.1:4321/', { waitUntil: 'domcontentloaded' });
   await p.setContent(html(c), { waitUntil: 'load' });
-  await p.evaluate(() => document.fonts.ready);
+  await p.evaluate(() => Promise.all([document.fonts.load('700 64px Archivo'), document.fonts.load('400 18px Inter'), document.fonts.load('600 18px Inter')]));
   await p.screenshot({ path: `public/${c.file}`, type: 'png' });
   console.log('wrote', c.file);
 }

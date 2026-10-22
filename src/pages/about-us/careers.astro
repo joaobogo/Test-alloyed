@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 const places = [
   ['United States', 'https://www.linkedin.com/company/alloyed-io/jobs/', 'Leadership, account management and implementation roles'],
-  ['El Salvador', 'https://www.linkedin.com/company/alloyed-io/jobs/', 'Bilingual nearshore operations, ad ops and finance'],
+  ['El Salvador', '/about-us/careers/el-salvador/', 'Bilingual nearshore operations, ad ops and finance'],
   ['Philippines', 'https://www.linkedin.com/company/alloyed-io/jobs/', 'Customer engagement and operations'],
   ['Bangladesh', 'https://www.linkedin.com/company/alloyed-io/jobs/', 'Data, ad operations and 24/7 delivery'],
 ];
@@ -19,7 +19,7 @@ const places = [
   <section class="py-20">
     <div class="container-x">
       <p class="eyebrow">Open roles by location</p>
-      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{places.map(([n, h, d]) => <li><a href={h} target="_blank" rel="noopener" class="card block h-full p-6 hover:border-brand-200"><h2 class="text-[22px] font-bold">{n}</h2><p class="mt-2 text-[14px] text-ink-600">{d}</p><p class="mt-4 text-[14px] font-semibold text-brand-600">View roles →</p></a></li>)}</ul>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{places.map(([n, h, d]) => <li><a href={h} target={h.startsWith("http") ? "_blank" : undefined} rel={h.startsWith("http") ? "noopener" : undefined} class="card block h-full p-6 hover:border-brand-200"><h2 class="text-[22px] font-bold">{n}</h2><p class="mt-2 text-[14px] text-ink-600">{d}</p><p class="mt-4 text-[14px] font-semibold text-brand-600">View roles →</p></a></li>)}</ul>
     </div>
   </section>
   <section class="bg-ink-50 py-20">
