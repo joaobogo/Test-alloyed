@@ -22,7 +22,7 @@ const timeline = [
 const schema = [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'About Alloyed', url: `${site.url}/about-us/`, mainEntity: { '@id': `${site.url}/#organization` } }, ...leadership.filter((l) => l.linkedin).map((l) => ({ '@context': 'https://schema.org', '@type': 'Person', name: l.name, jobTitle: l.role, worksFor: { '@id': `${site.url}/#organization` }, sameAs: l.linkedin }))];
 ---
 
-<Base title="About Alloyed (Formerly SEBPO): Leadership, History & Values" description="Alloyed is a US-headquartered, woman-owned managed operations company, formerly SEBPO. 20 years of delivery, four delivery centers, IAOP Global Outsourcing 100 and Inc. 5000 honoree. Meet the leadership team." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }]}>
+<Base title="About Alloyed (Formerly SEBPO): Leadership & History" description="Alloyed is a US-headquartered, woman-owned managed operations company, formerly SEBPO: 20 years of delivery, four delivery centers, IAOP 100 and Inc. 5000." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }]}>
   <section class="bg-ink-900 py-20 text-white sm:py-24">
     <div class="container-x">
       <p class="eyebrow-light">Who we are</p>

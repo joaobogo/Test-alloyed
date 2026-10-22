@@ -146,7 +146,7 @@ export const services: Service[] = [
     name: 'Finance & Accounting',
     short: 'AP/AR, billing, record-to-report and FP&A operations.',
     title: 'Finance & Accounting Outsourcing',
-    metaTitle: 'Finance & Accounting Outsourcing: AP, AR, Billing, R2R | Alloyed',
+    metaTitle: 'Finance & Accounting Outsourcing: AP, AR, R2R | Alloyed',
     metaDescription:
       'Outsourced accounts payable, accounts receivable, media billing, reconciliations and FP&A support. 100% billing accuracy and $2M annual savings for media and finance teams.',
     headline: 'Close faster with cleaner financial operations and fewer errors.',
@@ -220,7 +220,7 @@ export const services: Service[] = [
     name: 'Data & Analytics',
     short: 'Data engineering, AI annotation, data quality, reporting and BI.',
     title: 'Data Operations & Analytics Outsourcing',
-    metaTitle: 'Data Engineering, AI Annotation & Analytics Outsourcing | Alloyed',
+    metaTitle: 'Data Engineering & Analytics Outsourcing | Alloyed',
     metaDescription:
       'Outsourced data engineering, AI training-data annotation, data quality management and reporting. Closed a 7-day data gap and cut data engineering costs 46–53% for media clients.',
     headline: 'Cleaner pipelines, trusted reporting, confident decisions.',
@@ -346,7 +346,7 @@ export const industries: Industry[] = [
   {
     slug: 'media-publishers',
     name: 'Media & Publishers',
-    metaTitle: 'Operations Outsourcing for Media Companies & Publishers | Alloyed',
+    metaTitle: 'Operations Outsourcing for Media & Publishers | Alloyed',
     metaDescription:
       'Ad operations, media billing, data engineering and QA outsourcing for broadcasters, publishers and mass media brands. $2M annual savings, 100% on-time reporting.',
     headline: 'Operations partners to broadcasters, publishers and mass media brands for two decades.',
@@ -364,7 +364,7 @@ export const industries: Industry[] = [
   {
     slug: 'advertising-adtech',
     name: 'Advertising & Ad Tech',
-    metaTitle: 'Ad Ops & Creative Outsourcing for Agencies and Ad Tech | Alloyed',
+    metaTitle: 'Ad Ops & Creative Outsourcing for Agencies & Ad Tech',
     metaDescription:
       'Ad operations, creative production, programmatic QA and data operations for agencies and ad tech platforms. Doubled creative output without added cost during peak spend.',
     headline: 'Ad ops, creative and data operations built for agencies and ad tech platforms.',
@@ -400,7 +400,7 @@ export const industries: Industry[] = [
   {
     slug: 'financial-services',
     name: 'Financial Services & Fintech',
-    metaTitle: 'AML, KYC & Data Operations Outsourcing for Financial Services | Alloyed',
+    metaTitle: 'AML, KYC & Data Operations Outsourcing for Finance',
     metaDescription:
       'Compliance, risk, data quality and finance operations outsourcing for banks, financial intelligence firms and fintechs. 99%+ accuracy across AML, KYC and entity data.',
     headline: 'Compliance and data operations that regulators, auditors and customers can trust.',
@@ -418,7 +418,7 @@ export const industries: Industry[] = [
   {
     slug: 'travel-hospitality',
     name: 'Travel & Hospitality',
-    metaTitle: 'Operations Outsourcing for Travel & Hospitality Brands | Alloyed',
+    metaTitle: 'Operations Outsourcing for Travel & Hospitality',
     metaDescription:
       'Ad operations, partner support, finance and analytics outsourcing for travel and hospitality brands. 53% faster turnaround and 100% billing accuracy for a leading travel brand.',
     headline: 'Scalable operations for brands that live on peak season.',
@@ -436,7 +436,7 @@ export const industries: Industry[] = [
   {
     slug: 'sports-entertainment',
     name: 'Sports & Entertainment',
-    metaTitle: 'Sponsorship & Ad Operations Outsourcing for Sports Brands | Alloyed',
+    metaTitle: 'Sponsorship & Ad Ops Outsourcing for Sports Brands',
     metaDescription:
       'Ad operations, inventory and yield management, media planning and analytics outsourcing for sports leagues, teams and entertainment brands. 99.99% accuracy and ~70% cost advantage.',
     headline: 'Protect sponsorship revenue through every playoff, draft and marquee event.',

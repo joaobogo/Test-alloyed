@@ -6,7 +6,7 @@ import { locations, site } from '../../data/site';
 const schema = locations.map((l) => ({ '@context': 'https://schema.org', '@type': 'Place', name: `Alloyed ${l.city}`, address: { '@type': 'PostalAddress', addressLocality: l.city, addressCountry: l.country }, containedInPlace: { '@id': `${site.url}/#organization` } }));
 ---
 
-<Base title="Offshore & Nearshore Delivery Centers: El Salvador, Philippines, Bangladesh | Alloyed" description="Alloyed delivers 24/7 from four locations: US headquarters, nearshore San Salvador, and offshore Manila and Dhaka. Onshore management with global delivery." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }, { name: 'Global Delivery', href: '/about-us/locations/' }]}>
+<Base title="Delivery Centers: El Salvador, Philippines, Bangladesh" description="Alloyed delivers 24/7 from four locations: US headquarters, nearshore San Salvador, and offshore Manila and Dhaka. Onshore management with global delivery." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }, { name: 'Global Delivery', href: '/about-us/locations/' }]}>
   <section class="bg-ink-900 py-20 text-white sm:py-24">
     <div class="container-x">
       <p class="eyebrow-light">Global delivery</p>

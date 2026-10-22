@@ -19,7 +19,7 @@ const metrics = full?.metrics?.length ? full.metrics : cs.metrics;
 const intro = full?.intro || cs.summary;
 const description = (full?.metaDescription || cs.summary).slice(0, 158);
 const related = caseStudies.filter((c) => c.slug !== cs.slug && c.industry === cs.industry).slice(0, 3);
-const title = cs.title.length > 58 ? `${cs.title.slice(0, 55).trim()}… | Alloyed` : `${cs.title} | Alloyed`;
+const title = cs.title.length <= 50 ? `${cs.title} | Alloyed` : cs.title.length <= 60 ? cs.title : `${cs.title.slice(0, 57).trim()}…`;
 const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: cs.title, description, author: { '@id': `${site.url}/#organization` }, publisher: { '@id': `${site.url}/#organization` }, mainEntityOfPage: `${site.url}/insights/case-studies/${cs.slug}/`, about: cs.industry }];
 const sections: [string, string, string[] | undefined, string][] = [
   ['Challenge', 'What the client was up against', challenge, 'bg-ember-500'],

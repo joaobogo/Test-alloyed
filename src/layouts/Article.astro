@@ -11,7 +11,7 @@ const { article: a, kind, basePath, related } = Astro.props;
 const html = renderMarkdown(a.bodyMarkdown);
 const author = authorFor(a);
 const url = `${site.url}${basePath}${a.slug}/`;
-const title = a.title.length > 58 ? `${a.title.slice(0, 55).trim()}… | Alloyed` : `${a.title} | Alloyed`;
+const title = a.title.length <= 50 ? `${a.title} | Alloyed` : a.title.length <= 60 ? a.title : `${a.title.slice(0, 57).trim()}…`;
 const schema = [{
   '@context': 'https://schema.org',
   '@type': kind === 'News' ? 'NewsArticle' : 'Article',

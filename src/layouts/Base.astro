@@ -19,7 +19,15 @@ interface Props {
   lang?: string;
 }
 
-const { title, description, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true, ogImage: og = '/og-default.png', lang = 'en' } = Astro.props;
+const { title, description: rawDescription, ogType = 'website', noindex = false, schema = [], breadcrumbs = [], dark = true, ogImage: og = '/og-default.png', lang = 'en' } = Astro.props;
+// Keep descriptions under Google's ~158-character cutoff, ending on a sentence or clause.
+const clamp = (d: string, max = 158) => {
+  if (d.length <= max) return d;
+  const cut = d.slice(0, max);
+  const at = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '), cut.lastIndexOf(', '));
+  return (at > 80 ? cut.slice(0, at) : cut.slice(0, cut.lastIndexOf(' '))).replace(/[,;:]$/, '') + '.';
+};
+const description = clamp(rawDescription).replace(/\.\.$/, '.');
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(og, Astro.site).href;
 
