@@ -10,3 +10,4 @@ User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://alloyed.io/sitemap-index.xml
+Disallow: /demo/

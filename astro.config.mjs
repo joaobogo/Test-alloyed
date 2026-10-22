@@ -12,7 +12,7 @@ export default defineConfig({
   compressHTML: true,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/thank-you/') && !page.includes('/404'),
+      filter: (page) => !page.includes('/thank-you/') && !page.includes('/404') && !page.includes('/demo/'),
       changefreq: 'weekly',
       lastmod: new Date(),
     }),
