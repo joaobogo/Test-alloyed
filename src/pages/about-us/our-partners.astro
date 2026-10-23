@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
+import LogoWall from '../../components/LogoWall.astro';
 const partners = [
   ['SimpliSmart', 'Agentic AI for accelerated, end-to-end AI-powered enterprise operations.', 'Partnership announced 2026'],
   ['Supervity', 'The “AI BPO employee” for accounts payable and finance workflows.', 'Partnership announced 2026'],
@@ -17,6 +18,7 @@ const partners = [
       <p class="mt-5 max-w-[62ch] text-[17px] text-white/75">Evaluating emerging technology independently costs internal time most teams do not have. Alloyed ran a year-long, hands-on evaluation of the automation landscape so you do not have to. We tested real-world performance, ran security checks and built working relationships before adding any partner to the roster.</p>
     </div>
   </section>
+  <section class="border-b border-ink-100 py-10"><div class="container-x"><LogoWall heading="Partners in the Alloyed automation ecosystem" /></div></section>
   <section class="py-20">
     <div class="container-x grid gap-5 md:grid-cols-2">
       {partners.map(([n, d, s]) => <div class="card reveal p-7"><h2 class="font-display text-[30px] font-bold tracking-tight">{n}</h2><p class="mt-2 text-[15px] text-ink-600">{d}</p><p class="mt-4 text-[12.5px] font-semibold uppercase tracking-wider text-brand-600">{s}</p></div>)}

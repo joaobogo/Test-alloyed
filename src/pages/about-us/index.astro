@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
 import StatBand from '../../components/StatBand.astro';
+import Awards from '../../components/Awards.astro';
 import { leadership, proof, locations, site } from '../../data/site';
 
 const values = [
@@ -46,7 +47,7 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 
     </div>
   </section>
 
-  <section class="bg-ink-50 py-16"><div class="container-x"><StatBand /></div></section>
+  <section class="bg-ink-50 py-16"><div class="container-x"><StatBand /><div class="mt-5"><Awards /></div></div></section>
 
   <section class="py-20">
     <div class="container-x">

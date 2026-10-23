@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import LogoWall from '../components/LogoWall.astro';
 import { partners } from '../data/site';
 const steps = [['Scope alignment', 'We learn your goals, workflows and real constraints.'], ['Vendor proof of concept', 'We identify and test the right tools for your needs.'], ['Internal pilot', 'A controlled test before anything goes live.'], ['External test', 'Results validated before full rollout.']];
 const why = ['Trained teams build deep process knowledge first.', 'That knowledge shapes smarter, more reliable automation.', 'Cleaner data from human workflows fuels better AI.', 'Phased rollouts build trust across your organization.', 'Real-time feedback keeps operations improving over time.'];
@@ -32,7 +33,7 @@ const why = ['Trained teams build deep process knowledge first.', 'That knowledg
       <p class="eyebrow">Vetted automation partners</p>
       <h2 class="h-display mt-2 max-w-[22ch] text-[32px] sm:text-[40px]">The right partners, already vetted. You are not the pilot test.</h2>
       <div class="mt-10 grid gap-5 md:grid-cols-2">
-        <div class="card p-7"><ul class="flex flex-wrap gap-3">{partners.map((p) => <li class="rounded-full bg-brand-50 px-4 py-2 font-display text-[18px] font-bold text-brand-700">{p}</li>)}</ul><p class="mt-5 text-[15px] leading-relaxed text-ink-600">We ran an extensive, hands-on evaluation of the automation landscape: real-world performance tests, security checks, fit against client use cases, and direct working relationships, before adding anyone to the ecosystem.</p><a href="/about-us/our-partners/" class="btn-ghost mt-6">About the ecosystem</a></div>
+        <div class="card p-7"><LogoWall heading="" compact /><p class="mt-5 text-[15px] leading-relaxed text-ink-600">We ran an extensive, hands-on evaluation of the automation landscape: real-world performance tests, security checks, fit against client use cases, and direct working relationships, before adding anyone to the ecosystem.</p><a href="/about-us/our-partners/" class="btn-ghost mt-6">About the ecosystem</a></div>
         <ul class="grid gap-4">{[['Faster time to value', 'Skip months of vendor research and deploy automation that is already proven.'], ['Lower risk', 'Every partner has been vetted for reliability and results.'], ['Less internal lift', 'No need to dedicate your team to navigating a crowded market.'], ['Confidence in the outcome', 'Recommendations backed by our own diligence, not a sales pitch.']].map(([t, d]) => <li class="card p-5"><h3 class="font-sans text-[16px] font-semibold">{t}</h3><p class="mt-1 text-[14px] text-ink-600">{d}</p></li>)}</ul>
       </div>
     </div>

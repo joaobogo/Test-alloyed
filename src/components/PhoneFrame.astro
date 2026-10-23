@@ -1,0 +1,68 @@
+---
+// Device-frame viewer for the demo: the real site in an iframe at phone size,
+// with a page picker and a desktop toggle. Same-origin, so transitions and
+// scripts behave exactly as on a device.
+const pages = [
+  ['Home', '/'], ['Pricing', '/pricing/'], ['Ad Operations', '/services/marketing-services/'], ['Media & Publishers', '/industries/media-publishers/'],
+  ['Case study', '/insights/case-studies/how-a-global-sports-brand-protected-sponsorship-revenue-and-scaled-operations-without-adding-headcount/'], ['Global delivery', '/about-us/locations/'], ['Contact', '/contact/'],
+];
+---
+
+<div class="grid gap-8 lg:grid-cols-12 lg:items-start" id="phone-demo">
+  <div class="lg:col-span-5">
+    <p class="eyebrow-light">Mobile perspective</p>
+    <h2 class="h-display mt-2 text-[32px] text-white sm:text-[42px]">Most of this traffic arrives on a phone. Here is what it gets.</h2>
+    <p class="mt-4 text-[15.5px] text-white/70">LinkedIn, events and referrals land on mobile. The first screen names the service, the number and the next step; the menu, calculator, fit finder and forms are built thumb-first. Pick a page and scroll inside the device.</p>
+    <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Choose a page to preview">
+      {pages.map(([l, h], i) => <button type="button" data-frame-page={h} class:list={['rounded-full border px-3.5 py-1.5 text-[13px] font-semibold transition', i === 0 ? 'border-ember-500 bg-ember-500 text-ink-950' : 'border-white/20 text-white/80 hover:border-white/50']}>{l}</button>)}
+    </div>
+    <div class="mt-5 flex gap-2" role="group" aria-label="Device size">
+      <button type="button" data-frame-size="phone" class="rounded-lg border border-ember-500 bg-ember-500 px-3 py-1.5 text-[13px] font-semibold text-ink-950">Phone · 390px</button>
+      <button type="button" data-frame-size="tablet" class="rounded-lg border border-white/20 px-3 py-1.5 text-[13px] font-semibold text-white/80 hover:border-white/50">Tablet · 820px</button>
+    </div>
+    <p class="mt-6 text-[13px] text-white/60">Tip for the meeting: open the same URL on your own phone and hand it over. Nothing beats the real thing in their hand.</p>
+  </div>
+  <div class="lg:col-span-7">
+    <div class="mx-auto overflow-x-auto">
+      <div id="device" class="device mx-auto" data-size="phone">
+        <div class="device-bar" aria-hidden="true"><span>9:41</span><span class="device-island"></span><span>5G ▮▮▮</span></div>
+        <iframe id="device-frame" src="/" title="Site preview at phone size" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Inner viewport is exactly 390 x 740 (phone) or 820 x 600 (tablet). */
+  .device { position: relative; width: 418px; border-radius: 52px; background: #0a0d18; padding: 14px; box-shadow: 0 0 0 2px #2a3046, 0 40px 90px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.08); transition: width .4s cubic-bezier(.2,.7,.2,1), border-radius .4s; max-width: 100%; }
+  .device[data-size="tablet"] { width: 848px; border-radius: 30px; }
+  .device-bar { display: flex; align-items: center; justify-content: space-between; height: 34px; padding: 0 22px; font: 600 12px/1 Inter, system-ui, sans-serif; color: #fff; background: #0b1020; border-radius: 38px 38px 0 0; }
+  .device-island { width: 96px; height: 22px; border-radius: 999px; background: #0a0d18; }
+  .device[data-size="tablet"] .device-bar { border-radius: 16px 16px 0 0; }
+  .device[data-size="tablet"] .device-island { visibility: hidden; }
+  .device iframe { display: block; width: 100%; height: 740px; border: 0; border-radius: 0 0 38px 38px; background: #0b1020; }
+  .device[data-size="tablet"] iframe { height: 600px; border-radius: 0 0 16px 16px; }
+  @media (max-width: 440px) { .device { padding: 8px; border-radius: 36px; } .device-bar { border-radius: 28px 28px 0 0; } .device iframe { border-radius: 0 0 28px 28px; height: 640px; } }
+</style>
+
+<script>
+  const init = () => {
+    const frame = document.getElementById('device-frame') as HTMLIFrameElement | null;
+    const device = document.getElementById('device');
+    if (!frame || !device) return;
+    const base = location.pathname.includes('index.html') ? (p: string) => (p.endsWith('/') ? `${p}index.html` : p) : (p: string) => p;
+    const on = 'border-ember-500 bg-ember-500 text-ink-950', off = 'border-white/20 text-white/80 hover:border-white/50';
+    document.querySelectorAll<HTMLButtonElement>('[data-frame-page]').forEach((b) => b.addEventListener('click', () => {
+      frame.src = base(b.dataset.framePage!);
+      document.querySelectorAll<HTMLButtonElement>('[data-frame-page]').forEach((x) => { x.className = x.className.replace(on, off); });
+      b.className = b.className.replace(off, on);
+    }));
+    document.querySelectorAll<HTMLButtonElement>('[data-frame-size]').forEach((b) => b.addEventListener('click', () => {
+      device.dataset.size = b.dataset.frameSize;
+      document.querySelectorAll<HTMLButtonElement>('[data-frame-size]').forEach((x) => { x.className = x.className.replace(on, off); });
+      b.className = b.className.replace(off, on);
+    }));
+    frame.src = base('/');
+  };
+  document.addEventListener('astro:page-load', init);
+</script>
