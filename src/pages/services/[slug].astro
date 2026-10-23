@@ -4,6 +4,7 @@ import CTA from '../../components/CTA.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import ServiceFAQ, { faqFor } from '../../components/ServiceFAQ.astro';
 import { services, caseBySlug, teamModel, process, site } from '../../data/site';
+import { asset, slots } from '../../data/visuals';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 const { s } = Astro.props;
 const cs = caseBySlug(s.caseStudy)!;
 const related = services.filter((x) => x.slug !== s.slug).slice(0, 3);
+const heroImg = asset(slots.hero.service(s.slug));
 
 const schema = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqFor(s).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -44,7 +46,8 @@ const schema = [
         </div>
       </div>
       <div class="hero-in lg:col-span-5" style="--d:200ms">
-        <div class="tilt rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur" aria-hidden="true">
+        {heroImg && <img src={heroImg} alt="" width="1600" height="1000" class="mb-5 aspect-[16/10] w-full rounded-2xl border border-white/10 object-cover shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)]" fetchpriority="high" />}
+        <div class:list={['tilt rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur', heroImg && 'hidden lg:block']} aria-hidden="true">
           <div class="flex items-center justify-between text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60"><span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-mint-500"></span>Published outcomes</span><span class="rounded-full bg-white/5 px-2.5 py-1 font-medium normal-case tracking-normal">{s.name}</span></div>
           <ul class="mt-4 grid grid-cols-2 gap-3">
             {s.outcomes.map((o) => <li class="rounded-xl border border-white/10 bg-ink-900/60 p-4"><p class="h-display text-[30px] text-ember-400">{o.value}</p><p class="mt-1 text-[12.5px] leading-snug text-white/80">{o.label}</p><p class="mt-1 text-[11px] text-white/60">{o.client}</p></li>)}

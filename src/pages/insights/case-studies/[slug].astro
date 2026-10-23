@@ -4,6 +4,7 @@ import CTA from '../../../components/CTA.astro';
 import CaseCard from '../../../components/CaseCard.astro';
 import { caseStudies, site } from '../../../data/site';
 import { caseContentBySlug } from '../../../data/content';
+import { asset, slots } from '../../../data/visuals';
 
 export function getStaticPaths() {
   return caseStudies.map((cs) => ({ params: { slug: cs.slug }, props: { cs } }));
@@ -27,6 +28,7 @@ const sections: [string, string, string[] | undefined, string][] = [
   ['Results', 'Measurable outcomes', results, 'check'],
   ['Impact', 'What changed for the business', impact, 'bg-mint-500'],
 ];
+const heroImg = asset(slots.caseStudy(cs.slug));
 const isBullet = (s: string) => s.length < 220 && !/[.!?]\s+[A-Z]/.test(s);
 const lead = (s: string) => s.replace(/^\*\*(.+?):?\*\*:?\s*/, '<strong class="text-ink-900">$1:</strong> ').replace(/^([A-Z][A-Za-z&,/ ]{2,40}):\s/, '<strong class="text-ink-900">$1:</strong> ');
 const bold = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong class="text-ink-900">$1</strong>');
@@ -48,6 +50,7 @@ const bold = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong class="text-ink
       </div>
     </header>
 
+    {heroImg && <div class="container-x -mt-8 relative z-10"><img src={heroImg} alt="" width="1600" height="900" class="aspect-[16/9] w-full rounded-2xl border border-ink-100 object-cover shadow-[0_24px_64px_-24px_rgba(11,16,32,.45)]" /></div>}
     <section class="bg-ink-50 py-12">
       <div class="container-x">
         <ul class="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-ink-100 bg-ink-100 sm:grid-cols-3">

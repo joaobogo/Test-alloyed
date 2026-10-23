@@ -14,12 +14,12 @@
     "@fontsource-variable/inter": "^5.2.5",
     "@tailwindcss/vite": "^4.1.0",
     "astro": "^5.12.0",
-    "marked": "^15.0.12",
     "tailwindcss": "^4.1.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "lighthouse": "^12.8.2",
+    "marked": "^18.1.1",
     "playwright": "^1.49.1",
     "tsx": "^4.19.2"
   }

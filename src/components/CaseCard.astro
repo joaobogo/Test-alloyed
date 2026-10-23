@@ -1,12 +1,15 @@
 ---
 import type { CaseStudy } from '../data/site';
+import { asset, slots } from '../data/visuals';
 interface Props { cs: CaseStudy; compact?: boolean; level?: 'h2' | 'h3' }
 const { cs, compact = false, level = 'h3' } = Astro.props;
 const lead = cs.metrics[0];
 const Heading = level;
+const img = asset(slots.caseStudy(cs.slug));
 ---
 
-<a href={`/insights/case-studies/${cs.slug}/`} class="card group flex flex-col p-6 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-[0_24px_48px_-24px_rgba(51,44,242,.35)]">
+<a href={`/insights/case-studies/${cs.slug}/`} class="card group flex flex-col overflow-hidden p-6 transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-[0_24px_48px_-24px_rgba(51,44,242,.35)]">
+  {img && <img src={img} alt="" width="1600" height="900" class="-mx-6 -mt-6 mb-5 aspect-[16/9] w-[calc(100%+3rem)] max-w-none object-cover" loading="lazy" />}
   <div class="flex items-center justify-between gap-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-400">
     <span>{cs.industry}</span>
     <span class="rounded-full bg-brand-50 px-2.5 py-1 text-brand-700 normal-case tracking-normal">Case study</span>

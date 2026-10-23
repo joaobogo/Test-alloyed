@@ -15,6 +15,9 @@ import LogoWall from '../components/LogoWall.astro';
 import Awards from '../components/Awards.astro';
 import CTA from '../components/CTA.astro';
 import { services, industries, caseStudies, proof, partners, site } from '../data/site';
+import { asset, slots } from '../data/visuals';
+const heroStill = asset(slots.hero.homeBackground);
+const heroLoop = asset(slots.video.heroLoop);
 
 const featured = caseStudies.filter((c) => c.featured).slice(0, 3);
 
@@ -53,7 +56,9 @@ const whys = [
 >
   <!-- HERO -->
   <section class="relative isolate overflow-hidden bg-ink-900 text-white">
-    <HeroGL class="absolute inset-0 -z-10" />
+    {heroStill && <img src={heroStill} alt="" width="2400" height="1400" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-70" fetchpriority="high" />}
+    {heroLoop && <video class="absolute inset-0 -z-20 hidden h-full w-full object-cover opacity-70 lg:block" autoplay muted loop playsinline poster={heroStill ?? undefined} src={heroLoop}></video>}
+    {!heroStill && !heroLoop && <HeroGL class="absolute inset-0 -z-10" />}
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900 via-ink-900/70 to-transparent lg:via-ink-900/40" aria-hidden="true"></div>
     <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-ink-900 to-transparent" aria-hidden="true"></div>
 

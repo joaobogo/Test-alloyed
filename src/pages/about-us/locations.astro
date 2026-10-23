@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import CTA from '../../components/CTA.astro';
 import CoverageChart from '../../components/CoverageChart.astro';
 import { locations, site } from '../../data/site';
+import { asset, slots } from '../../data/visuals';
 const schema = locations.map((l) => ({ '@context': 'https://schema.org', '@type': 'Place', name: `Alloyed ${l.city}`, address: { '@type': 'PostalAddress', addressLocality: l.city, addressCountry: l.country }, containedInPlace: { '@id': `${site.url}/#organization` } }));
 ---
 
@@ -20,7 +21,7 @@ const schema = locations.map((l) => ({ '@context': 'https://schema.org', '@type'
   <section class="bg-ink-900 py-16 text-white"><div class="container-x"><p class="eyebrow-light">Coverage</p><h2 class="h-display mt-2 text-[30px] text-white sm:text-[38px]">Someone is always on your account.</h2><div class="mt-8"><CoverageChart /></div></div></section>
   <section class="py-20">
     <div class="container-x">
-      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{locations.map((l) => <li class="card reveal p-6"><p class="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-400">{l.type}</p><h2 class="mt-2 text-[24px] font-bold">{l.city}</h2><p class="text-[14px] text-ink-600">{l.country} · {l.tz}</p><p class="mt-3 text-[14px] text-ink-600">{l.note}</p></li>)}</ul>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{locations.map((l) => <li class="card reveal overflow-hidden p-6">{asset(slots.location(l.city)) && <img src={asset(slots.location(l.city))!} alt={`${l.city}, ${l.country}`} width="1200" height="800" class="-mx-6 -mt-6 mb-5 aspect-[3/2] w-[calc(100%+3rem)] max-w-none object-cover" loading="lazy" />}<p class="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-400">{l.type}</p><h2 class="mt-2 text-[24px] font-bold">{l.city}</h2><p class="text-[14px] text-ink-600">{l.country} · {l.tz}</p><p class="mt-3 text-[14px] text-ink-600">{l.note}</p></li>)}</ul>
     </div>
   </section>
   <section class="bg-ink-50 py-20">

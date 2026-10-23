@@ -4,6 +4,7 @@ import CTA from '../../components/CTA.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import IndustryFAQ, { faqFor } from '../../components/IndustryFAQ.astro';
 import { industries, serviceBySlug, caseBySlug, site } from '../../data/site';
+import { asset, slots } from '../../data/visuals';
 
 export function getStaticPaths() {
   return industries.map((ind) => ({ params: { slug: ind.slug }, props: { ind } }));
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 const { ind } = Astro.props;
 const svcs = ind.services.map(serviceBySlug);
 const cases = ind.caseStudies.map(caseBySlug).filter(Boolean);
+const heroImg = asset(slots.hero.industry(ind.slug));
 const schema = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqFor(ind).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }, { '@context': 'https://schema.org', '@type': 'Service', name: `Operations outsourcing for ${ind.name}`, description: ind.metaDescription, provider: { '@id': `${site.url}/#organization` }, audience: { '@type': 'BusinessAudience', name: ind.name }, url: `${site.url}/industries/${ind.slug}/` }];
 ---
 
@@ -27,7 +29,8 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnti
         <div class="hero-in mt-8 flex flex-col gap-3 sm:flex-row" style="--d:240ms"><a href="#contact" class="btn-ember !px-6">Talk to an operations expert</a><a href="/insights/case-studies/" class="btn-ghost-light !px-6">See the case studies</a></div>
       </div>
       <div class="hero-in lg:col-span-5" style="--d:200ms">
-        <div class="tilt rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur" aria-hidden="true">
+        {heroImg && <img src={heroImg} alt="" width="1600" height="1000" class="mb-5 aspect-[16/10] w-full rounded-2xl border border-white/10 object-cover shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)]" fetchpriority="high" />}
+        <div class:list={['tilt rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur', heroImg && 'hidden lg:block']} aria-hidden="true">
           <div class="flex items-center justify-between text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60"><span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-mint-500"></span>Published outcomes</span><span class="rounded-full bg-white/5 px-2.5 py-1 font-medium normal-case tracking-normal">{ind.name}</span></div>
           <ul class="mt-4 grid gap-3">
             {ind.outcomes.map((o) => <li class="flex items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-ink-900/60 px-4 py-3"><span class="h-display text-[30px] text-ember-400">{o.value}</span><span class="text-right text-[13px] leading-snug text-white/80">{o.label}</span></li>)}

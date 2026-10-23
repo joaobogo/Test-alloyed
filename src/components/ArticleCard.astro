@@ -1,11 +1,14 @@
 ---
 import { formatDate } from '../data/content';
+import { asset, slots } from '../data/visuals';
 interface Props { href: string; kicker: string; title: string; excerpt: string; date?: string; tags?: string[]; level?: 'h2' | 'h3' }
 const { href, kicker, title, excerpt, date, tags = [], level = 'h3' } = Astro.props;
 const Heading = level;
+const img = asset(slots.article(href.split('/').filter(Boolean).pop() || ''));
 ---
 
-<a href={href} class="card lift group flex h-full flex-col p-6">
+<a href={href} class="card lift group flex h-full flex-col overflow-hidden p-6">
+  {img && <img src={img} alt="" width="1600" height="900" class="-mx-6 -mt-6 mb-5 aspect-[16/9] w-[calc(100%+3rem)] max-w-none object-cover" loading="lazy" />}
   <div class="flex items-center justify-between gap-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-500">
     <span class="rounded-full bg-brand-50 px-2.5 py-1 normal-case tracking-normal text-brand-700">{kicker}</span>
     {date && <time datetime={date}>{formatDate(date)}</time>}

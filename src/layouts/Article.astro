@@ -5,10 +5,12 @@ import CTA from '../components/CTA.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { renderMarkdown, formatDate, readingTime, authorFor, type Article } from '../data/content';
 import { site } from '../data/site';
+import { asset, slots } from '../data/visuals';
 
 interface Props { article: Article; kind: 'Perspective' | 'News'; basePath: string; related: Article[] }
 const { article: a, kind, basePath, related } = Astro.props;
 const html = renderMarkdown(a.bodyMarkdown);
+const heroImg = asset(slots.article(a.slug));
 const author = authorFor(a);
 const url = `${site.url}${basePath}${a.slug}/`;
 const title = a.title.length <= 50 ? `${a.title} | Alloyed` : a.title.length <= 60 ? a.title : `${a.title.slice(0, 57).trim()}…`;
@@ -48,6 +50,7 @@ const crumbs = [{ name: 'Insights', href: '/insights/' }, { name: kind === 'News
       </div>
     </header>
 
+    {heroImg && <div class="container-x -mt-8 relative z-10 max-w-4xl"><img src={heroImg} alt="" width="1600" height="900" class="aspect-[16/9] w-full rounded-2xl border border-ink-100 object-cover shadow-[0_24px_64px_-24px_rgba(11,16,32,.45)]" /></div>}
     <div class="container-x grid gap-12 py-14 lg:grid-cols-12">
       <div class="prose-alloyed lg:col-span-8" set:html={html} />
       <div class="lg:col-span-4">

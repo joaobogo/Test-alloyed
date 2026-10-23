@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { asset, slots } from '../../data/visuals';
 const places = [
   ['United States', 'https://www.linkedin.com/company/alloyed-io/jobs/', 'Leadership, account management and implementation roles'],
   ['El Salvador', '/about-us/careers/el-salvador/', 'Bilingual nearshore operations, ad ops and finance'],
@@ -27,7 +28,7 @@ const places = [
       <p class="eyebrow">Why work here</p>
       <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">Life at Alloyed</h2>
       <ul class="mt-10 grid gap-4 sm:grid-cols-2">
-        {[['Continuous learning', 'Structured training programs, certifications and mentorship to accelerate your growth.'], ['Clear growth paths', 'Defined progression tracks with transparent requirements and regular performance reviews.'], ['Collaborative culture', 'Work alongside industry experts in a supportive, team-oriented environment.'], ['Work-life balance', 'Flexible arrangements, competitive benefits and recognition programs that value your contribution.'], ['We care for our community', 'Volunteer hours, pro-bono talent and donations through our three pillars of giving: time, talent and treasure.'], ['We value our team', 'Leaders take the time to connect personally with employees and understand their motivations and strengths.']].map(([t, d]) => <li class="card p-6"><h3 class="text-[19px] font-bold">{t}</h3><p class="mt-2 text-[14.5px] text-ink-600">{d}</p></li>)}
+        {[['Continuous learning', 'Structured training programs, certifications and mentorship to accelerate your growth.'], ['Clear growth paths', 'Defined progression tracks with transparent requirements and regular performance reviews.'], ['Collaborative culture', 'Work alongside industry experts in a supportive, team-oriented environment.'], ['Work-life balance', 'Flexible arrangements, competitive benefits and recognition programs that value your contribution.'], ['We care for our community', 'Volunteer hours, pro-bono talent and donations through our three pillars of giving: time, talent and treasure.'], ['We value our team', 'Leaders take the time to connect personally with employees and understand their motivations and strengths.']].map(([t, d], i) => <li class="card overflow-hidden p-6">{asset(slots.culture(i + 1)) && <img src={asset(slots.culture(i + 1))!} alt="" width="1200" height="800" class="-mx-6 -mt-6 mb-5 aspect-[3/2] w-[calc(100%+3rem)] max-w-none object-cover" loading="lazy" />}<h3 class="text-[19px] font-bold">{t}</h3><p class="mt-2 text-[14.5px] text-ink-600">{d}</p></li>)}
       </ul>
     </div>
   </section>
