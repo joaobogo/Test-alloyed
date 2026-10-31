@@ -37,6 +37,9 @@ Run with `astro preview` on port 4321:
 node scripts/links.mjs                       # no broken internal links
 node scripts/axe.mjs                         # WCAG 2.1 AA, every template
 node scripts/lh.mjs http://127.0.0.1:4321/   # Lighthouse mobile + desktop
+node scripts/qa.mjs                          # titles, descriptions, H1s, canonicals
+node scripts/overflow.mjs                    # no clipped or overflowing text at 360/390 px
+node scripts/perf.mjs                        # scroll frame times under 4x CPU throttle
 ```
 
 Current: Lighthouse 99–100 mobile / 90 desktop performance, 100 accessibility, 100 best practices, 100 SEO on every template tested.

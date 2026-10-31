@@ -51,7 +51,7 @@ const crumbs = [{ name: 'Insights', href: '/insights/' }, { name: kind === 'News
     </header>
 
     {heroImg && <div class="container-x -mt-8 relative z-10 max-w-4xl"><img src={heroImg} alt="" width="1600" height="900" class="aspect-[16/9] w-full rounded-2xl border border-ink-100 object-cover shadow-[0_24px_64px_-24px_rgba(11,16,32,.45)]" /></div>}
-    <div class="container-x grid gap-12 py-14 lg:grid-cols-12">
+    <div class="container-x grid grid-cols-1 gap-12 py-14 lg:grid-cols-12">
       <div class="prose-alloyed lg:col-span-8" set:html={html} />
       <div class="lg:col-span-4">
         <div class="sticky top-24 space-y-4">

@@ -12,14 +12,14 @@ const results = services.map((s) => ({ slug: s.slug, name: s.name, headline: s.h
 const model = { pilot: 'Dedicated Teams', handoff: 'Managed Services', automation: 'Project-Based, then Dedicated', 'cost-model': 'Dedicated Teams' };
 const why = {
   volume: 'Because volume is the constraint, we would start by sizing a dedicated team against your peak weeks, not your average.',
-  errors: 'Because errors are the constraint, the pilot runs under double QA with a published accuracy target from day one.',
+  errors: 'Because errors are the constraint, the pilot runs with two-step QA review and an agreed accuracy target from day one.',
   cost: 'Because cost is the constraint, discovery produces a fully loaded cost comparison against your in-house baseline first.',
   speed: 'Because turnaround is the constraint, we map the hand-offs in your workflow and set a turnaround SLA before anything else.',
 };
 ---
 
 <div class="card overflow-hidden" id="fit">
-  <div class="grid lg:grid-cols-12">
+  <div class="grid lg:grid-cols-12 [&_fieldset]:min-w-0 [&>div]:min-w-0">
     <div class="bg-ink-900 p-7 text-white lg:col-span-5 lg:p-9">
       <p class="eyebrow-light">Find your fit</p>
       <h3 class="h-display mt-2 text-[28px] text-white sm:text-[34px]">Three questions. One recommendation.</h3>

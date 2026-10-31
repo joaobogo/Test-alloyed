@@ -111,6 +111,7 @@ const website = {
     <script type="application/ld+json" set:html={JSON.stringify(website)} />
     {crumbs && <script type="application/ld+json" set:html={JSON.stringify(crumbs)} />}
     {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <link rel="alternate" type="application/rss+xml" title="Alloyed Insights" href="/rss.xml" />
     <slot name="head" />
 
     <script is:inline>

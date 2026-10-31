@@ -25,9 +25,22 @@ Scored against the ten findings in the OmniFlow audit (September 2026, 41/100).
 - **App-like page transitions**, scroll reveals, count-up stats, 3D tilt; all respect reduced-motion.
 - Accessibility 100, best practices 100, SEO 100 on every template; zero broken internal links.
 
+## Second pass (31 October 2026): speed, honesty, conversion, coverage
+
+**Runtime performance.** The WebGL hero now renders at half resolution, caps at 30 fps, pauses while the visitor scrolls, tears itself down on client-side navigation and stays off on low-core or Data Saver devices. The process-flow diagram lost its animated SVG blur filter. The sticky header only blurs on desktop; cards fade a pre-rendered shadow instead of animating `box-shadow`; the mobile CTA bar uses two IntersectionObservers and zero layout reads on scroll; every component removes its listeners on `astro:before-swap`. Scripted-scroll probe (`scripts/perf.mjs`, 4x CPU throttle): homepage average frame time 24 ms → 16.6 ms on a 390 px phone, 108 ms → 28 ms at 1440 px under software GL; every inner page at 16.5 ms with zero frames over 20 ms, including after three client-side navigations.
+
+**Claims.** Blanket promises became sourced statements. The H1 reads "up to 70% below US hiring cost, run to a 99.99% QA standard"; "24/7" became "follow-the-sun" except where a published case uses it; "double QA", "300+ platforms", "free session", "no setup fees" and "pilot of two to five for 90 days" were removed or softened; response time is "typically within one business day". A "Where these numbers come from" block on the homepage and pricing page links every headline figure (92 NPS, 98%, 43%, 99.99%, ~70%, $250K vs $850K, 2x, 500%) to the published metric or case study it comes from.
+
+**Conversion.** Contact page shows the form first on phones. Thank-you page explains the three next steps, offers the phone number and the savings estimator, and shows three case studies. The lead form locks its button on submit so slow networks never double-post. Hero headline no longer clips at 360–390 px (verified by `scripts/overflow.mjs` across 26 templates at 360 and 390 px).
+
+**Coverage.** New `/faq/` page: 81 answers across getting started, pricing, delivery and governance, security and compliance, company, every service and every industry, with a live filter and one FAQPage schema. New `/rss.xml` feed of perspectives and news, advertised in `<head>` and the footer. `/blog/*` already 301s to Perspectives. Navigation and footer link the FAQ.
+
+**Gates after the pass.** 73 pages, 0 QA issues, 0 broken links, axe clean on every template, Lighthouse home 100/100/100/100 mobile and 93/100/100/100 desktop, FAQ and service pages 94 desktop with LCP 1.5 s and CLS 0.
+
 ## Still needs the client
 
 - Final privacy policy and terms text (placeholders in place).
 - Leadership headshots and client logos, if approved (components accept them).
-- Confirm phone number, email and hours. Add a scheduling link to the thank-you page if they use one.
+- Confirm phone number, email, hours and the "typically within one business day" response commitment. Add a scheduling link to the thank-you page if they use one.
+- Confirm the security and compliance FAQ answers (access reviews, delivery-center controls, certifications) with operations before launch.
 - GTM container ID as `PUBLIC_GTM_ID` in Netlify.

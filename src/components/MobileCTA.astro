@@ -20,12 +20,19 @@
     const bar = document.getElementById('mobile-cta');
     if (!bar) return;
     bar.hidden = false; bar.setAttribute('data-off', '');
-    let formVisible = false;
-    const forms = document.querySelectorAll('form, #contact, footer');
-    const io = new IntersectionObserver((es) => { formVisible = es.some((e) => e.isIntersecting) || [...forms].some((f) => { const r = f.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }); apply(); }, { threshold: 0 });
-    forms.forEach((f) => io.observe(f));
-    const apply = () => { const past = scrollY > innerHeight * 0.8; if (past && !formVisible) bar.removeAttribute('data-off'); else bar.setAttribute('data-off', ''); };
-    addEventListener('scroll', apply, { passive: true }); apply();
+    if (!matchMedia('(max-width: 639px)').matches) return; // desktop never needs the observers
+    // Two observers, zero layout reads on scroll: one tracks forms/footer, one
+    // tracks a sentinel at 80% of the first screen.
+    const visibleForms = new Set<Element>();
+    let past = false, shown = false;
+    const apply = () => { const next = past && visibleForms.size === 0; if (next !== shown) { shown = next; next ? bar.removeAttribute('data-off') : bar.setAttribute('data-off', ''); } };
+    const fio = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? visibleForms.add(e.target) : visibleForms.delete(e.target))); apply(); });
+    document.querySelectorAll('form, #contact, footer').forEach((f) => fio.observe(f));
+    const sentinel = document.createElement('div'); sentinel.setAttribute('aria-hidden', 'true'); sentinel.style.cssText = 'position:absolute;top:80vh;left:0;width:1px;height:1px;pointer-events:none';
+    document.body.prepend(sentinel);
+    const sio = new IntersectionObserver(([e]) => { past = e.boundingClientRect.top < 0; apply(); });
+    sio.observe(sentinel);
+    document.addEventListener('astro:before-swap', () => { fio.disconnect(); sio.disconnect(); sentinel.remove(); }, { once: true });
   };
   document.addEventListener('astro:page-load', init);
 </script>

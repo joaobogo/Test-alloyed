@@ -12,7 +12,7 @@ const rows = [
 ---
 
 <div class={`relative ${cls}`} aria-hidden="true">
-  <div class="rounded-2xl border border-white/10 bg-ink-800/80 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)] backdrop-blur">
+  <div class="rounded-2xl border border-white/10 bg-ink-800/95 p-5 shadow-[0_30px_80px_-30px_rgba(0,0,0,.7)]">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">
         <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint-500 opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-mint-500"></span></span>
@@ -21,9 +21,9 @@ const rows = [
       <span class="rounded-full bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/60">This week</span>
     </div>
 
-    <div class="mt-5 grid grid-cols-4 gap-2.5">
-      {[['99.99%', 'Accuracy'], ['98%', 'Retention'], ['92', 'NPS'], ['24/7', 'Coverage']].map(([v, l]) => (
-        <div class="rounded-xl border border-white/10 bg-ink-900/60 p-3">
+    <div class="mt-5 grid grid-cols-2 gap-2.5 min-[420px]:grid-cols-4">
+      {[['99.99%', 'Accuracy'], ['98%', 'Retention'], ['92', 'NPS'], ['3', 'Regions on shift']].map(([v, l]) => (
+        <div class="min-w-0 rounded-xl border border-white/10 bg-ink-900/60 p-3">
           <p class="h-display text-[22px] text-white">{v}</p>
           <p class="text-[11.5px] text-white/60">{l}</p>
         </div>

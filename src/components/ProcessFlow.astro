@@ -4,7 +4,7 @@
 // through ingest / analyze / optimize, to measured outcomes.
 import { process } from '../data/site';
 const inputs = ['Your platforms', 'Tickets & queues', 'Documents & data', 'Campaign briefs'];
-const outputs = [['99.99%', 'QA accuracy'], ['Weekly', 'KPI reporting'], ['~70%', 'lower cost'], ['24/7', 'coverage']];
+const outputs = [['99.99%', 'QA accuracy'], ['Weekly', 'KPI reporting'], ['Up to 70%', 'lower cost, published'], ['3', 'regions on shift']];
 ---
 
 <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
@@ -16,7 +16,6 @@ const outputs = [['99.99%', 'QA accuracy'], ['Weekly', 'KPI reporting'], ['~70%'
     <svg viewBox="0 0 900 300" class="flow w-full" aria-hidden="true">
       <defs>
         <linearGradient id="pf-g" x1="0" x2="1"><stop offset="0" stop-color="#332cf2"/><stop offset="1" stop-color="#ff6b00"/></linearGradient>
-        <filter id="pf-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
       {/* input rails converge into the pipeline */}
       {[40, 110, 190, 260].map((y) => (
@@ -24,7 +23,9 @@ const outputs = [['99.99%', 'QA accuracy'], ['Weekly', 'KPI reporting'], ['~70%'
       ))}
       {/* pipeline spine */}
       <path d="M180 150 H 720" fill="none" stroke="#e9ecf4" stroke-width="14" stroke-linecap="round" />
-      <path class="spine" d="M180 150 H 720" fill="none" stroke="url(#pf-g)" stroke-width="4" stroke-linecap="round" stroke-dasharray="18 22" filter="url(#pf-glow)" />
+      {/* soft glow is a wide low-alpha stroke: no SVG filter, so the animated dash never forces a blur re-raster */}
+      <path d="M180 150 H 720" fill="none" stroke="url(#pf-g)" stroke-width="10" stroke-linecap="round" opacity=".18" />
+      <path class="spine" d="M180 150 H 720" fill="none" stroke="url(#pf-g)" stroke-width="4" stroke-linecap="round" stroke-dasharray="18 22" />
       {/* output rails */}
       {[40, 110, 190, 260].map((y) => (
         <path class="rail out" d={`M720 150 C 790 150, 810 ${y}, 900 ${y}`} fill="none" stroke="#ffd1b0" stroke-width="2" stroke-dasharray="6 10" />

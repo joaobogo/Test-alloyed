@@ -14,21 +14,15 @@ import FitFinder from '../components/FitFinder.astro';
 import LogoWall from '../components/LogoWall.astro';
 import Awards from '../components/Awards.astro';
 import CTA from '../components/CTA.astro';
+import Sources from '../components/Sources.astro';
 import { services, industries, caseStudies, proof, partners, site } from '../data/site';
 import { asset, slots } from '../data/visuals';
+import { homeFaq as faq } from '../data/faq';
 const heroStill = asset(slots.hero.homeBackground);
 const heroLoop = asset(slots.video.heroLoop);
 
 const featured = caseStudies.filter((c) => c.featured).slice(0, 3);
 
-const faq = [
-  { q: 'What does Alloyed do?', a: 'Alloyed runs business operations for enterprise teams: ad operations, media billing and finance, AML/KYC compliance, data engineering and analytics, customer engagement and quality assurance. Dedicated teams work inside your platforms with onshore management and delivery from El Salvador, the Philippines and Bangladesh.' },
-  { q: 'Is Alloyed the same company as SEBPO?', a: 'Yes. SEBPO rebranded as Alloyed in 2026 following a management buyout of the US operations. Same leadership, same clients, same 20-year delivery record, with an expanded AI and automation practice.' },
-  { q: 'How much does it cost compared with hiring?', a: 'In a published engagement, a nine-person Alloyed ad operations team costs roughly $250,000 a year against $850,000 to $900,000 for a fully loaded US team of the same size, a cost advantage of about 70%. Your number depends on roles, volumes and coverage; we size it in the first conversation.' },
-  { q: 'How quickly can a team start?', a: 'Discovery and implementation planning typically run two to four weeks. A named implementation lead documents your workflows, builds the team with delivery center leadership, and runs a pilot under double QA before full ramp.' },
-  { q: 'Who manages the team day to day?', a: 'A US-based account manager and a client success manager who joins every governance call, plus a team leader in the delivery center who owns workloads, schedules and KPIs. You get one escalation path and weekly reporting.' },
-  { q: 'Where are Alloyed teams located?', a: 'Headquarters in the Philadelphia metro area with delivery centers in San Salvador, El Salvador; Manila, Philippines; and Dhaka, Bangladesh, giving 24/7 coverage across US, European and APAC time zones.' },
-];
 
 const schema = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
@@ -40,10 +34,10 @@ const schema = [
 ];
 
 const whys = [
-  ['Process first, then automation', 'We map and fix the workflow before introducing technology. That is why our automations hold up in production: 500% throughput gains, 60% fewer errors.', 'M4 12h16M12 4v16'],
-  ['Onshore management, global delivery', 'US-based implementation and account leads; bilingual nearshore teams in El Salvador; 24/7 offshore delivery in Manila and Dhaka.', 'M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18'],
-  ['Your platforms, your controls', 'Teams work inside your stack under least-privilege access with documented controls. 300+ platforms supported over two decades.', 'M5 7h14M5 12h14M5 17h8'],
-  ['Governance you can audit', 'Weekly KPI reporting, quarterly business reviews, a client success manager in every governance call. 99.99% QA accuracy is a process, not a promise.', 'M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z'],
+  ['Process first, then automation', 'We map and fix the workflow before introducing technology. That is why our automations hold up in production: a 500% productivity gain and 60–75% faster processing in published engagements.', 'M4 12h16M12 4v16'],
+  ['Onshore management, global delivery', 'US-based implementation and account leads; bilingual nearshore teams in El Salvador; follow-the-sun delivery from Manila and Dhaka.', 'M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18'],
+  ['Your platforms, your controls', 'Teams work inside your stack under least-privilege access with documented controls, across hundreds of platforms over two decades.', 'M5 7h14M5 12h14M5 17h8'],
+  ['Governance you can audit', 'Weekly KPI reporting, quarterly business reviews, a client success manager in every governance call. 99.99% QA accuracy is the published standard, and the weekly report shows where you stand against it.', 'M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z'],
   ['Vetted AI partner ecosystem', 'SimpliSmart, Supervity, Beam AI and Thread AI, tested on real client workloads before they reach you.', 'M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.5-.5z'],
   ['Built to last', '43% of partnerships exceed five years. Our longest financial services client has been with us for two decades.', 'M12 21s-7-4.5-7-11a7 7 0 0114 0c0 6.5-7 11-7 11z'],
 ];
@@ -51,7 +45,7 @@ const whys = [
 
 <Base
   title="Alloyed | Outsourced Ad Ops, Finance & Compliance Teams"
-  description="Alloyed (formerly SEBPO) runs ad ops, finance, compliance and data teams for media, advertising and financial services companies. ~70% lower cost, 99.99% accuracy."
+  description="Alloyed (formerly SEBPO) runs ad ops, finance, compliance and data teams for media, advertising and financial services companies. 20 years, 92 NPS, 99.99% QA accuracy, up to 70% below US hiring cost."
   schema={schema}
 >
   <!-- HERO -->
@@ -62,14 +56,14 @@ const whys = [
     <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-900 via-ink-900/70 to-transparent lg:via-ink-900/40" aria-hidden="true"></div>
     <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-ink-900 to-transparent" aria-hidden="true"></div>
 
-    <div class="container-x relative grid items-center gap-14 py-20 sm:py-24 lg:grid-cols-12 lg:py-20 xl:py-28">
+    <div class="container-x relative grid grid-cols-1 items-center gap-14 py-20 sm:py-24 lg:grid-cols-12 lg:py-20 xl:py-28">
       <div class="lg:col-span-7">
         <p class="eyebrow-light hero-in" style="--d:0ms">Formerly SEBPO · Since 2006</p>
-        <h1 class="h-display hero-in mt-5 max-w-[22ch] text-[40px] text-white sm:text-[54px] lg:text-[60px]" style="--d:80ms">
-          Outsourced ad ops, finance and compliance teams that cost <span class="text-ember-400">70% less</span> and run at <span class="whitespace-nowrap">99.99% accuracy.</span>
+        <h1 class="h-display hero-in mt-5 max-w-[22ch] text-[36px] text-white min-[400px]:text-[40px] sm:text-[54px] lg:text-[60px]" style="--d:80ms">
+          Outsourced ad&nbsp;ops, finance and compliance teams at <span class="text-ember-400">up to 70%&nbsp;below</span> US&nbsp;hiring cost, run to a&nbsp;99.99% QA&nbsp;standard.
         </h1>
         <p class="hero-in mt-6 max-w-[54ch] text-[17px] leading-relaxed text-white/75 sm:text-[19px]" style="--d:160ms">
-          Alloyed runs the highest-volume workflows at media, advertising and financial services companies: dedicated teams inside your platforms, US management, global delivery, every KPI reported weekly.
+          Alloyed runs the highest-volume workflows at media, advertising and financial services companies: dedicated teams inside your platforms, US management, global delivery, every KPI reported to you on a fixed cadence. <a href="#sources" class="text-white/60 underline underline-offset-2 hover:text-white">Numbers and their sources</a>.
         </p>
         <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row" style="--d:240ms">
           <a href="/contact/" class="btn-ember !px-6 !py-3.5 text-[16px]">Talk to an operations expert
@@ -97,9 +91,9 @@ const whys = [
       <div class="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p class="eyebrow">Predictable performance</p>
-          <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">Numbers our clients hold us to.</h2>
+          <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">The numbers Alloyed publishes and is held to.</h2>
         </div>
-        <p class="max-w-md text-[14.5px] text-ink-500">Measured across every engagement, reported to clients weekly, reviewed quarterly.</p>
+        <p class="max-w-md text-[14.5px] text-ink-500">Company-level metrics across active engagements. <a href="#sources" class="underline underline-offset-2">How each is measured</a>.</p>
       </div>
       <div class="reveal"><StatBand /></div>
       <div class="mt-5 reveal"><Awards /></div>
@@ -151,7 +145,7 @@ const whys = [
   <!-- WHY ALLOYED -->
   <section class="relative overflow-hidden bg-ink-900 py-20 text-white sm:py-28">
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
-    <div class="container-x relative grid gap-14 lg:grid-cols-12">
+    <div class="container-x relative grid grid-cols-1 gap-14 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <p class="eyebrow-light">Why Alloyed</p>
         <h2 class="h-display mt-2 text-[34px] text-white sm:text-[46px]">Delivery partners, not a service vendor.</h2>
@@ -234,7 +228,7 @@ const whys = [
 
   <!-- FAQ -->
   <section class="py-20 sm:py-28">
-    <div class="container-x grid gap-10 lg:grid-cols-12">
+    <div class="container-x grid grid-cols-1 gap-10 lg:grid-cols-12">
       <div class="lg:col-span-4">
         <p class="eyebrow">Questions</p>
         <h2 class="h-display mt-2 text-[34px] sm:text-[40px]">What buyers ask first.</h2>
@@ -253,5 +247,6 @@ const whys = [
     </div>
   </section>
 
+  <Sources />
   <CTA />
 </Base>

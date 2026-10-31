@@ -6,18 +6,18 @@ export const faqFor = (s: Service) => [
   { q: `What does Alloyed’s ${s.name.toLowerCase()} service include?`, a: `${s.capabilities.map((c) => c.title).join(', ')}. Each capability is delivered by a dedicated team with documented SOPs, QA checkpoints and weekly KPI reporting, working inside your own platforms.` },
   { q: `Who is ${s.name.toLowerCase()} outsourcing a fit for?`, a: `${s.serves.slice(0, 4).map((w) => w.title).join(', ')} and similar teams running high volumes where accuracy, speed and governance matter.` },
   { q: 'What results have clients seen?', a: s.outcomes.map((o) => `${o.value} ${o.label} (${o.client.toLowerCase()})`).join('; ') + '.' },
-  { q: 'How does an engagement start?', a: 'A 30-minute working session to map one workflow, then two to four weeks of discovery and documentation led by a named implementation lead, a pilot under double QA, and ramp to plan. Business hours, extended coverage or 24/7 depending on the workflow.' },
-  { q: 'Which tools and platforms do your teams work in?', a: `${s.tools.join(', ')}, and 300+ platforms over two decades. Access follows least-privilege principles with documented controls.` },
+  { q: 'How does an engagement start?', a: 'A 30-minute working session to map one workflow, then two to four weeks of discovery and documentation led by a named implementation lead, a pilot measured against an agreed accuracy target, and ramp to plan. Business hours, extended or follow-the-sun coverage depending on the workflow.' },
+  { q: 'Which tools and platforms do your teams work in?', a: `${s.tools.join(', ')}, and hundreds of platforms over two decades. Access follows least-privilege principles with documented controls.` },
 ];
 const faq = faqFor(s);
 ---
 
 <section class="py-20">
-  <div class="container-x grid gap-10 lg:grid-cols-12">
+  <div class="container-x grid grid-cols-1 gap-10 lg:grid-cols-12">
     <div class="lg:col-span-4">
       <p class="eyebrow">Questions</p>
       <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">{s.name} FAQ</h2>
-      <p class="mt-4 text-[15px] text-ink-600">Anything else? An operations expert replies within one business day.</p>
+      <p class="mt-4 text-[15px] text-ink-600">Anything else? An operations expert replies personally, typically within one business day.</p>
       <a href="#contact" class="btn-primary mt-6">{s.cta}</a>
     </div>
     <div class="divide-y divide-ink-100 rounded-2xl border border-ink-100 lg:col-span-8">

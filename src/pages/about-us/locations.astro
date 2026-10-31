@@ -7,14 +7,14 @@ import { asset, slots } from '../../data/visuals';
 const schema = locations.map((l) => ({ '@context': 'https://schema.org', '@type': 'Place', name: `Alloyed ${l.city}`, address: { '@type': 'PostalAddress', addressLocality: l.city, addressCountry: l.country }, containedInPlace: { '@id': `${site.url}/#organization` } }));
 ---
 
-<Base title="Delivery Centers: El Salvador, Philippines, Bangladesh" description="Alloyed delivers 24/7 from four locations: US headquarters, nearshore San Salvador, and offshore Manila and Dhaka. Onshore management with global delivery." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }, { name: 'Global Delivery', href: '/about-us/locations/' }]}>
+<Base title="Delivery Centers: El Salvador, Philippines, Bangladesh" description="Alloyed delivers follow-the-sun from four locations: US headquarters, nearshore San Salvador, and offshore Manila and Dhaka. Onshore management with global delivery." schema={schema} breadcrumbs={[{ name: 'About', href: '/about-us/' }, { name: 'Global Delivery', href: '/about-us/locations/' }]}>
   <section class="bg-ink-900 py-20 text-white sm:py-24">
     <div class="container-x">
       <p class="eyebrow-light">Global delivery</p>
       <h1 class="h-display mt-3 max-w-[16ch] text-[42px] text-white sm:text-[58px]">Offshore and nearshore delivery centers with onshore management.</h1>
-      <p class="mt-5 max-w-[62ch] text-[17px] text-white/75">Strategically positioned teams give 24/7 coverage across US, European and APAC time zones, with bilingual nearshore delivery in El Salvador for real-time collaboration.</p>
+      <p class="mt-5 max-w-[62ch] text-[17px] text-white/75">Strategically positioned teams give follow-the-sun coverage across US, European and APAC time zones, with bilingual nearshore delivery in El Salvador for real-time collaboration.</p>
       <ul class="mt-12 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-5">
-        {[['4', 'Delivery locations'], ['24/7', 'Coverage'], ['20+', 'Years operating'], ['92', 'Net Promoter Score'], ['98%', 'Client retention']].map(([v, l]) => <li><p class="h-display text-[34px] text-white">{v}</p><p class="text-[13px] text-white/65">{l}</p></li>)}
+        {[['4', 'Delivery locations'], ['3', 'Regions on shift'], ['20+', 'Years operating'], ['92', 'Net Promoter Score'], ['98%', 'Client retention']].map(([v, l]) => <li><p class="h-display text-[34px] text-white">{v}</p><p class="text-[13px] text-white/65">{l}</p></li>)}
       </ul>
     </div>
   </section>

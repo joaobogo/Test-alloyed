@@ -9,14 +9,14 @@ export const faqFor = (ind: Industry) => {
     { q: `What does Alloyed do for ${ind.name.toLowerCase()} companies?`, a: `${svcs.map((s) => s.name).join(', ')}: dedicated teams running these workflows inside your platforms with US management and 24/7 global delivery. ${ind.intro}` },
     { q: `What results have ${ind.name.toLowerCase()} clients seen?`, a: ind.outcomes.map((o) => `${o.value} ${o.label}`).join('; ') + '. Full write-ups are published as case studies.' },
     { q: 'Which problems do you typically take on first?', a: ind.pains.join('; ') + '. Most engagements begin with one of these, as a pilot of two to five people, then expand.' },
-    { q: 'How quickly can you start?', a: 'A 30-minute working session, then two to four weeks of discovery and documentation led by a named implementation lead, a pilot under double QA and ramp to plan.' },
+    { q: 'How quickly can you start?', a: 'A 30-minute working session, then two to four weeks of discovery and documentation led by a named implementation lead, a pilot measured against an agreed accuracy target and ramp to plan.' },
   ];
 };
 const faq = faqFor(ind);
 ---
 
 <section class="py-20">
-  <div class="container-x grid gap-10 lg:grid-cols-12">
+  <div class="container-x grid grid-cols-1 gap-10 lg:grid-cols-12">
     <div class="lg:col-span-4">
       <p class="eyebrow">Questions</p>
       <h2 class="h-display mt-2 text-[32px] sm:text-[40px]">{ind.name} FAQ</h2>

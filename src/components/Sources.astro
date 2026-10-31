@@ -1,0 +1,32 @@
+---
+// Every headline number on the site, with where it comes from. Enterprise buyers
+// check; showing the receipts converts better than a bigger claim.
+interface Props { dark?: boolean; compact?: boolean }
+const { dark = false, compact = false } = Astro.props;
+const rows = [
+  { n: '92 NPS · 98% retention · 43% over five years · 99.99% QA accuracy', s: 'Alloyed’s published company metrics (alloyed.io, 2026). Measured across active client engagements.', href: '/about-us/' },
+  { n: '~70% lower cost than hiring in the US', s: 'Published engagement: a media organization cut ad ops hiring costs by 70% with an Alloyed team.', href: '/insights/case-studies/how-alloyed-cut-media-ad-ops-hiring-costs-by-70/' },
+  { n: '$250K vs $850K–$900K a year · 828 hours saved', s: 'Published engagement: nine ad operations FTEs for a global sports brand, compared with a fully loaded US team of the same size.', href: '/insights/case-studies/how-a-global-sports-brand-protected-sponsorship-revenue-and-scaled-operations-without-adding-headcount/' },
+  { n: '2x creative output · 60–75% faster processing', s: 'Published engagement: an ad tech leader during peak spend periods.', href: '/insights/case-studies/how-an-adtech-leader-doubled-creative-output-without-increasing-cost-during-peak-spend-periods/' },
+  { n: '500% productivity gain', s: 'Published engagement: task automation for a media client.', href: '/insights/case-studies/task-automation-increases-productivity-by-500/' },
+];
+---
+
+<section id="sources" class:list={['py-12', dark ? 'text-white' : '']} aria-labelledby="sources-h">
+  <div class="container-x">
+    <div class:list={['rounded-2xl border p-6 sm:p-8', dark ? 'border-white/10 bg-white/[0.04]' : 'border-ink-100 bg-ink-50']}>
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+        <h2 id="sources-h" class:list={['font-display text-[20px] font-bold', dark ? 'text-white' : 'text-ink-900']}>Where these numbers come from</h2>
+        <p class:list={['text-[13.5px]', dark ? 'text-white/60' : 'text-ink-500']}>Results vary by workflow, volume and coverage. Every figure links to its source.</p>
+      </div>
+      <ul class:list={['mt-5 grid gap-x-8 gap-y-3 text-[14px]', compact ? '' : 'md:grid-cols-2']}>
+        {rows.map((r) => (
+          <li class="flex gap-3">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember-500" aria-hidden="true"></span>
+            <p class:list={[dark ? 'text-white/75' : 'text-ink-600']}><strong class:list={['font-semibold', dark ? 'text-white' : 'text-ink-900']}>{r.n}.</strong> {r.s} <a href={r.href} class:list={['font-medium underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand-600']}>Source</a></p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

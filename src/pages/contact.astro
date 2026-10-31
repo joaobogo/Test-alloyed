@@ -5,14 +5,14 @@ import { site, proof } from '../data/site';
 const schema = [{ '@context': 'https://schema.org', '@type': 'ContactPage', url: `${site.url}/contact/`, mainEntity: { '@id': `${site.url}/#organization` } }];
 ---
 
-<Base title="Contact Alloyed: Talk to an Operations Expert" description="Reach Alloyed Monday to Friday, 8:30 AM to 5:30 PM ET. Tell us about your workflow and an operations expert replies within one business day." schema={schema} breadcrumbs={[{ name: 'Contact', href: '/contact/' }]}>
+<Base title="Contact Alloyed: Talk to an Operations Expert" description="Reach Alloyed Monday to Friday, 8:30 AM to 5:30 PM ET. Tell us about your workflow and an operations expert replies personally, typically within one business day." schema={schema} breadcrumbs={[{ name: 'Contact', href: '/contact/' }]}>
   <section class="relative overflow-hidden bg-ink-900 text-white">
     <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
-    <div class="container-x relative grid gap-12 py-16 sm:py-20 lg:grid-cols-12">
-      <div class="lg:col-span-5">
+    <div class="container-x relative grid grid-cols-1 gap-12 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="order-2 lg:order-1 lg:col-span-5">
         <p class="eyebrow-light">Contact</p>
         <h1 class="h-display mt-3 text-[42px] text-white sm:text-[56px]">Let’s talk. We’re ready.</h1>
-        <p class="mt-5 max-w-md text-[16.5px] leading-relaxed text-white/75">Questions about a service, a quote for a dedicated team, or a second opinion on an automation plan. An operations expert replies within one business day.</p>
+        <p class="mt-5 max-w-md text-[16.5px] leading-relaxed text-white/75">Questions about a service, a quote for a dedicated team, or a second opinion on an automation plan. An operations expert replies personally, typically within one business day.</p>
         <dl class="mt-8 space-y-4 text-[15px]">
           <div><dt class="text-white/60">Phone</dt><dd><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="font-medium text-white hover:underline">{site.phone}</a></dd></div>
           <div><dt class="text-white/60">Email</dt><dd><a href={`mailto:${site.email}`} class="font-medium text-white hover:underline">{site.email}</a></dd></div>
@@ -22,7 +22,7 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'ContactPage', url:
         <ul class="mt-10 space-y-2 text-[13px] text-white/65">{proof.map((p) => <li>· {p.label}</li>)}</ul>
         <p class="mt-8 text-[14px] text-white/65">Looking for a job? <a href="/about-us/careers/" class="text-white underline underline-offset-2">See open roles</a>.</p>
       </div>
-      <div class="lg:col-span-7"><LeadForm level="h2" /></div>
+      <div class="order-1 lg:order-2 lg:col-span-7"><p class="eyebrow-light mb-3 lg:hidden">Contact · a person replies, typically within one business day</p><LeadForm level="h2" /></div>
     </div>
   </section>
 </Base>

@@ -46,29 +46,50 @@ const { class: cls = '' } = Astro.props;
     const uR = gl.getUniformLocation(prog, 'r'), uT = gl.getUniformLocation(prog, 't'), uM = gl.getUniformLocation(prog, 'm');
     gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
+    // The field is soft by design, so it renders at a fraction of device
+    // resolution (a 1440px hero draws ~0.5 MP) and is upscaled by the compositor.
     const small = innerWidth < 768;
-    const scale = Math.min(small ? 0.6 : 1, devicePixelRatio > 1 ? 0.75 : 1);
+    const scale = small ? 0.35 : 0.5;
+    const ac = new AbortController(); const { signal } = ac;
     const resize = () => { canvas.width = Math.floor(wrap.clientWidth * scale); canvas.height = Math.floor(wrap.clientHeight * scale); gl.viewport(0, 0, canvas.width, canvas.height); gl.uniform2f(uR, canvas.width, canvas.height); };
-    resize(); addEventListener('resize', resize, { passive: true });
+    resize(); addEventListener('resize', resize, { passive: true, signal });
 
     let mx = 0.5, my = 0.5, tx = 0.5, ty = 0.5;
-    if (!small) addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth; ty = 1 - e.clientY / innerHeight; }, { passive: true });
+    if (!small) addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth; ty = 1 - e.clientY / innerHeight; }, { passive: true, signal });
 
-    let running = true, raf = 0; const t0 = performance.now();
+    // Visible + tab focused + not mid-scroll. Scrolling gets the whole frame budget.
+    let visible = true, scrolling = 0, raf = 0, last = 0; const t0 = performance.now();
+    const FRAME = 1000 / 30; // 30 fps is plenty for a slow field and halves GPU time
     const frame = (now: number) => {
-      if (!running) return;
-      mx += (tx - mx) * 0.04; my += (ty - my) * 0.04;
-      gl.uniform1f(uT, (now - t0) / 1000); gl.uniform2f(uM, mx, my);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      raf = 0;
+      if (!visible || document.hidden || !wrap.isConnected) return;
+      if (now - last >= FRAME - 1) {
+        last = now;
+        mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
+        gl.uniform1f(uT, (now - t0) / 1000); gl.uniform2f(uM, mx, my);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
       raf = requestAnimationFrame(frame);
     };
-    const io = new IntersectionObserver(([e]) => { running = e.isIntersecting && !document.hidden; if (running) raf = requestAnimationFrame(frame); else cancelAnimationFrame(raf); });
+    const kick = () => { if (!raf && visible && !document.hidden && !scrolling && wrap.isConnected) raf = requestAnimationFrame(frame); };
+    const halt = () => { if (raf) cancelAnimationFrame(raf); raf = 0; };
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? kick() : halt(); });
     io.observe(wrap);
-    document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) raf = requestAnimationFrame(frame); });
+    document.addEventListener('visibilitychange', () => (document.hidden ? halt() : kick()), { signal });
+    addEventListener('scroll', () => { halt(); clearTimeout(scrolling); scrolling = setTimeout(() => { scrolling = 0; kick(); }, 120) as unknown as number; }, { passive: true, signal });
+    // Tear everything down when the client router swaps the page.
+    document.addEventListener('astro:before-swap', () => { halt(); io.disconnect(); ac.abort(); gl.getExtension('WEBGL_lose_context')?.loseContext(); }, { once: true });
     canvas.classList.remove('opacity-0');
     wrap.querySelector('.hero-gl-fallback')?.classList.add('opacity-0');
   };
-  document.addEventListener('astro:page-load', () => { 'requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200); });
+  const boot = () => {
+    if (!document.querySelector('.hero-gl')) return;
+    // Low-end devices keep the static SVG: fewer than 4 cores or Data Saver.
+    const nav = navigator as any;
+    if ((nav.hardwareConcurrency && nav.hardwareConcurrency < 4) || nav.connection?.saveData) return;
+    'requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200);
+  };
+  document.addEventListener('astro:page-load', boot);
 </script>
 
 <style>

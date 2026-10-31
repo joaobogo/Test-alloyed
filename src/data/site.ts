@@ -64,6 +64,7 @@ export const nav = [
       { label: 'Global Delivery', href: '/about-us/locations/' },
       { label: 'Technology Partners', href: '/about-us/our-partners/' },
       { label: 'Careers', href: '/about-us/careers/' },
+      { label: 'FAQ', href: '/faq/' },
     ],
   },
 ];
@@ -77,10 +78,10 @@ export const proof = [
 ];
 
 export const stats = [
-  { value: 92, suffix: '', label: 'Net Promoter Score', note: '80+ is considered world-class; most firms land between 20 and 50.' },
-  { value: 98, suffix: '%', label: 'Client retention rate', note: 'Consistent delivery that keeps partnerships in place year after year.' },
-  { value: 99.99, suffix: '%', label: 'QA accuracy rate', note: 'Structured QA frameworks and continuous monitoring on every workflow.', decimals: 2 },
-  { value: 43, suffix: '%', label: 'Client partnerships over 5 years', note: 'Well above industry benchmarks for outsourcing relationships.' },
+  { value: 92, suffix: '', label: 'Net Promoter Score', note: 'Alloyed’s published client score. B2B services benchmarks typically fall between 20 and 50.' },
+  { value: 98, suffix: '%', label: 'Client retention rate', note: 'Published company metric across active client engagements.' },
+  { value: 99.99, suffix: '%', label: 'QA accuracy rate', note: 'Published QA standard; each engagement reports its own accuracy against it.', decimals: 2 },
+  { value: 43, suffix: '%', label: 'Client partnerships over 5 years', note: 'Longest relationship: two decades with a financial services client.' },
 ];
 
 export type Service = {
@@ -136,7 +137,7 @@ export const services: Service[] = [
       { title: 'Search Operations', bullets: ['SEO and SEM workflow operations', 'Performance validation', 'Visibility and efficiency improvements'] },
     ],
     tools: ['Google Ad Manager', 'DV360 & The Trade Desk', 'Meta, TikTok & LinkedIn Ads', 'Salesforce & Operative', 'Tag managers', 'Reporting & BI'],
-    coverage: ['Business hours', 'Extended coverage', '24/7'],
+    coverage: ['Business hours', 'Extended coverage', 'Follow-the-sun'],
     caseStudy: 'how-a-global-sports-brand-protected-sponsorship-revenue-and-scaled-operations-without-adding-headcount',
     cta: 'Talk to an ad ops expert',
     keywords: ['ad operations outsourcing', 'ad ops outsourcing company', 'media planning outsourcing', 'creative production outsourcing'],
@@ -210,7 +211,7 @@ export const services: Service[] = [
       { title: 'Regulatory Support', bullets: ['Audit-ready workflows and controls', 'Case handling across regulated operations', 'Governance and accuracy'] },
     ],
     tools: ['AML screening tools', 'Sanctions & PEP auditors', 'Identity & business validation', 'Risk scoring engines', 'Brand safety platforms'],
-    coverage: ['Business hours', 'Extended coverage', '24/7 monitoring on request'],
+    coverage: ['Business hours', 'Extended coverage', 'Follow-the-sun monitoring on request'],
     caseStudy: 'scaling-aml-kyc-operations-to-strengthen-risk-detection-and-regulatory-confidence',
     cta: 'Talk to a compliance ops expert',
     keywords: ['KYC outsourcing', 'AML operations outsourcing', 'compliance BPO'],
@@ -284,7 +285,7 @@ export const services: Service[] = [
       { title: 'Sales Support', bullets: ['Proposal and contracting workflows', 'Clean, current CRM operations', 'Faster opportunity movement'] },
     ],
     tools: ['Salesforce & HubSpot', 'Zendesk & ticketing platforms', 'Sprinklr & social analytics', 'Knowledge base systems', 'Reporting & BI'],
-    coverage: ['Business hours', 'Extended coverage', '24/7'],
+    coverage: ['Business hours', 'Extended coverage', 'Follow-the-sun'],
     caseStudy: 'elevating-customer-engagement-through-integrated-social-planning-analytics-and-partner-operations',
     cta: 'Talk to a CX ops expert',
     keywords: ['customer engagement outsourcing', 'social media operations outsourcing', 'sales support BPO'],
@@ -322,7 +323,7 @@ export const services: Service[] = [
       { title: 'Tech & Platform Support', bullets: ['Platform QA and reliability', 'Lightweight development and integrations', 'Structured ticketing workflows'] },
     ],
     tools: ['Jira, Asana & workflow tools', 'Ticketing & queue systems', 'API gateways & vendor APIs', 'QA & audit tools', 'Migration & platform support'],
-    coverage: ['Business hours', 'Extended coverage', '24/7'],
+    coverage: ['Business hours', 'Extended coverage', 'Follow-the-sun'],
     caseStudy: 'unlocking-30-greater-efficiency-for-a-global-advertising-brand-through-operational-excellence',
     cta: 'Talk to an operations expert',
     keywords: ['quality assurance outsourcing', 'operations outsourcing', 'business process outsourcing'],
@@ -828,7 +829,7 @@ export const locations = [
   { type: 'Headquarters', city: 'Philadelphia Metro', country: 'United States', note: 'Onshore leadership, account management and implementation', tz: 'ET' },
   { type: 'Nearshore delivery', city: 'San Salvador', country: 'El Salvador', note: 'Bilingual teams aligned to US time zones', tz: 'CT' },
   { type: 'Offshore delivery', city: 'Manila', country: 'Philippines', note: 'Customer engagement and operations', tz: 'PHT' },
-  { type: 'Offshore delivery', city: 'Dhaka', country: 'Bangladesh', note: 'Multiple sites, 24/7 operations, data and ad ops', tz: 'BST' },
+  { type: 'Offshore delivery', city: 'Dhaka', country: 'Bangladesh', note: 'Multiple sites, round-the-clock shifts, data and ad ops', tz: 'BST' },
 ];
 
 export const engagementModels = [

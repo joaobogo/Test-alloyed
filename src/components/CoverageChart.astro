@@ -6,7 +6,7 @@ const hours = Array.from({ length: 24 }, (_, i) => i); // 0 = midnight ET
 const centers = [
   { name: 'Philadelphia (HQ)', role: 'Onshore management', color: 'bg-white', text: 'text-ink-900', from: 8, to: 18 },
   { name: 'San Salvador', role: 'Nearshore, bilingual', color: 'bg-ember-500', text: 'text-ink-950', from: 7, to: 19 },
-  { name: 'Dhaka', role: 'Offshore, 24/7 sites', color: 'bg-brand-500', text: 'text-white', from: 20, to: 10 },
+  { name: 'Dhaka', role: 'Offshore, round-the-clock shifts', color: 'bg-brand-500', text: 'text-white', from: 20, to: 10 },
   { name: 'Manila', role: 'Offshore', color: 'bg-brand-300', text: 'text-ink-900', from: 19, to: 7 },
 ];
 const on = (c: (typeof centers)[0], h: number) => (c.from < c.to ? h >= c.from && h < c.to : h >= c.from || h < c.to);
