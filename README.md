@@ -31,7 +31,7 @@ Deploy target is Netlify (`netlify.toml`, `public/_redirects`, `public/_headers`
 
 ## Quality gates
 
-Run with `astro preview` on port 4321:
+Run with `astro preview` on port 4321, or with `node scripts/serve.mjs` (Brotli, port 4322, pass `BASE=http://127.0.0.1:4322`) for production-like Lighthouse numbers:
 
 ```bash
 node scripts/links.mjs                       # no broken internal links
@@ -40,9 +40,11 @@ node scripts/lh.mjs http://127.0.0.1:4321/   # Lighthouse mobile + desktop
 node scripts/qa.mjs                          # titles, descriptions, H1s, canonicals
 node scripts/overflow.mjs                    # no clipped or overflowing text at 360/390 px
 node scripts/perf.mjs                        # scroll frame times under 4x CPU throttle
+node scripts/lh-all.mjs                      # Lighthouse mobile on 24 templates (FORM=desktop for desktop)
+node scripts/load.mjs                        # cold-cache Slow 4G first-visit: requests, kB, FCP, LCP, load
 ```
 
-Current: Lighthouse 99–100 mobile / 90 desktop performance, 100 accessibility, 100 best practices, 100 SEO on every template tested.
+Current: Lighthouse performance 100 mobile and 100 desktop, accessibility 100, best practices 100, SEO 100 on all 24 templates (Brotli server). First visit on Slow 4G: 6 requests, 72–90 kB, LCP under 1 s.
 
 ## Before launch
 

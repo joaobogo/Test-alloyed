@@ -37,6 +37,21 @@ Scored against the ten findings in the OmniFlow audit (September 2026, 41/100).
 
 **Gates after the pass.** 73 pages, 0 QA issues, 0 broken links, axe clean on every template, Lighthouse home 100/100/100/100 mobile and 93/100/100/100 desktop, FAQ and service pages 94 desktop with LCP 1.5 s and CLS 0.
 
+## Load-speed verification (1 November 2026)
+
+Measured against `scripts/serve.mjs`, a production-like static server (Brotli, immutable asset caching), because Astro's preview server sends no compression and made the earlier desktop numbers pessimistic.
+
+| Check | Result |
+|---|---|
+| Lighthouse mobile, 24 templates (`scripts/lh-all.mjs`) | Performance 100 on every page; LCP 1.4–1.7 s simulated slow 4G; CLS 0; TBT 0 ms |
+| Lighthouse desktop, 24 templates (`FORM=desktop`) | Performance 100 on every page; LCP 0.4 s; Speed Index 0.2–0.3 s |
+| Cold cache, Slow 4G, 4x CPU, phone (`scripts/load.mjs`) | 6 requests per page; 72–90 kB transferred; LCP 0.49–0.91 s; load event 0.63–1.19 s |
+| Scroll frame time, 4x CPU (`scripts/perf.mjs`) | 16.5–16.6 ms average on every page on a 390 px phone, including after client-side navigations |
+
+What ships on a first visit: one HTML document (26–43 kB compressed, CSS inlined), two self-hosted subset fonts (46 kB, preloaded), one 15 kB router script (cached for a year), the favicon and manifest. No third-party requests before consent. Open Graph images were re-encoded from 6.9 MB to 1.8 MB. The WebGL hero now starts after the load event, compiles its shader in parallel where the driver supports it, and renders at half resolution at 30 fps; the headline slides in without an opacity fade so it is painted on the first frame.
+
+Only `/thank-you/` scores below 100 on SEO (69) and that is by design: it is `noindex`.
+
 ## Still needs the client
 
 - Final privacy policy and terms text (placeholders in place).

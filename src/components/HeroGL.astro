@@ -10,11 +10,11 @@ const { class: cls = '' } = Astro.props;
 
 <div class={`hero-gl ${cls}`} aria-hidden="true">
   <HeroArt class="hero-gl-fallback absolute inset-0 h-full w-full" />
-  <canvas class="hero-gl-canvas absolute inset-0 h-full w-full opacity-0 transition-opacity duration-1000"></canvas>
+  <canvas class="hero-gl-canvas absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500"></canvas>
 </div>
 
 <script>
-  const start = () => {
+  const start = async () => {
     const wrap = document.querySelector<HTMLElement>('.hero-gl');
     const canvas = wrap?.querySelector<HTMLCanvasElement>('.hero-gl-canvas');
     if (!wrap || !canvas) return;
@@ -38,6 +38,10 @@ const { class: cls = '' } = Astro.props;
     const sh = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s; };
     const prog = gl.createProgram()!;
     gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog);
+    // Compile off the main thread where the driver allows it, and only touch the
+    // program once it reports completion, so shader compilation never blocks input.
+    const par = gl.getExtension('KHR_parallel_shader_compile');
+    if (par) await new Promise<void>((res) => { const poll = () => (gl.getProgramParameter(prog, par.COMPLETION_STATUS_KHR) ? res() : requestAnimationFrame(poll)); poll(); });
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
     gl.useProgram(prog);
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
@@ -87,11 +91,12 @@ const { class: cls = '' } = Astro.props;
     // Low-end devices keep the static SVG: fewer than 4 cores or Data Saver.
     const nav = navigator as any;
     if ((nav.hardwareConcurrency && nav.hardwareConcurrency < 4) || nav.connection?.saveData) return;
-    'requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200);
+    const idle = () => ('requestIdleCallback' in window ? (window as any).requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 300));
+    document.readyState === 'complete' ? idle() : addEventListener('load', idle, { once: true });
   };
   document.addEventListener('astro:page-load', boot);
 </script>
 
 <style>
-  .hero-gl-fallback { transition: opacity 1s ease; }
+  .hero-gl-fallback { transition: opacity .5s ease; }
 </style>

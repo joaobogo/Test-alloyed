@@ -1,6 +1,6 @@
 // Frame-time probe: scrolls each page under 4x CPU throttling and reports long frames.
 import { chromium } from 'playwright';
-const base = 'http://127.0.0.1:4321';
+const base = process.env.BASE || 'http://127.0.0.1:4321';
 const pages = process.argv.slice(2).length ? process.argv.slice(2) : ['/', '/services/marketing-services/', '/pricing/', '/industries/media-publishers/', '/insights/case-studies/', '/about-us/'];
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--enable-gpu-rasterization'] });
 const measure = async (page) => page.evaluate(async () => {
